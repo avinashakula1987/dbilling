@@ -1,0 +1,1 @@
+This is a billing software for RETAIL & WHOLESALE purpose
