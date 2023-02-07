@@ -1,11 +1,5 @@
 <?php	
 	define('Title', 'Dealer Software');
-	// class myDb extends SQLite3{
-	// 	function __construct(){
-	// 		$this->open('database.db');
-	// 	}
-	// }
-	// $db = new myDb();
 
 	$db = mysqli_connect("localhost", "root", "", "dbilling");
 	
