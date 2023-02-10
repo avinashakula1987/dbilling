@@ -40,16 +40,17 @@
 						<label>Qty</label><br>
 						<select id='quantity' class='form-control' >
 							<option value="">Select</option>
-							<option value="Box">Box</option>
-							<option value="10 pack">10 pack</option>
-							<option value="30 pack">30 pack</option>
-							<option value="50 pack">50 pack</option>
-							<option value="100 pack">100 pack</option>
-							<option value="200 pack">200 pack</option>
-							<option value="500 pack">500 pack</option>
-							<option value="1000 pack">1000 pack</option>
-							<option value="10000 pack">10000 pack</option>
-							<option value="1 kg">1 kg</option>
+							<?php
+								$sql = "SELECT * FROM quantity WHERE status='1' ORDER BY id DESC";
+								$get = mysqli_query($db, $sql);
+								$sno = 1;
+								while( $res = mysqli_fetch_array($get) ){
+									$id = $res['id'];
+									$quantity = $res['quantity'];
+									echo "<option value='$quantity'>$quantity</option>";
+								}	
+							?>
+							
 						</select>
 					</div>
 					
