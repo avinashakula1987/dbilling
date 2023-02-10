@@ -44,6 +44,7 @@
 					$transaction = $res['transaction'];
 					$fullPayment = $res['fullPayment'];
 					$partialPayment = $res['partialPayment'];
+					$returnStatus = $res['returnStatus'];
 					$array = unserialize($res['info']);						
 				}else if( isset($_GET['modifyInvoice']) ){
 					$invoiceId = $_GET['modifyInvoice'];
@@ -62,6 +63,7 @@
 					$transaction = $res['transaction'];
 					$fullPayment = $res['fullPayment'];
 					$partialPayment = $res['partialPayment'];
+					$returnStatus = $res['returnStatus'];
 					$array = unserialize($res['info']);						
 				}else{
 					echo "
@@ -113,6 +115,9 @@
 							<option value='In'>In</option>
 							<option value='Out'>Out</option>
 						</select>
+					</div>
+					<div class='form-group col-md-3 col-sm-6 col-xs-12'>
+						Return <?php echo $returnStatus==1 ? "<input type='checkbox' id='returnStatus' checked='true' />" : "<input type='checkbox' id='returnStatus' />";  ?> 
 					</div>
 					<div class='form-group col-md-3 col-sm-6 col-xs-12'>
 						<select id='fullPayment' class='form-control'>

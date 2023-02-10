@@ -68,6 +68,9 @@
 						</select>
 					</div>
 					<div class='form-group col-md-3 col-sm-6 col-xs-12'>
+						Return <input type='checkbox' id='returnStatus' />
+					</div>
+					<div class='form-group col-md-3 col-sm-6 col-xs-12'>
 						<select id='fullPayment' class='form-control'>
 							<option value='Full'>Full</option>
 							<option value='Partial'>Partial</option>
@@ -100,8 +103,7 @@
 						</div>
 						<div class='form-group col-md-2 col-sm-2 col-xs-2 row'>
 							Amount
-						</div>
-						
+						</div>						
 						<div class='form-group col-md-2 col-sm-2 col-xs-2 row'>
 							Total
 						</div>

@@ -1,0 +1,520 @@
+<?php include("database.php"); ?>
+<?php include("session.php"); ?>
+<?php
+
+	if( isset($_POST['billmobile']) && isset($_POST['currentlypayingnow']) ){
+		$billmobile = $_POST['billmobile'];
+		$currentlypayingnow = $_POST['currentlypayingnow'];
+		$currentlypayingnowa = $_POST['currentlypayingnowa'];
+		$sql = "SELECT COUNT(*) as count FROM credits WHERE mobile='$billmobile'";
+		$qry = $db->query($sql);
+		$rows = $qry->fetchArray();
+		$count = $rows['count'];
+		if( $count == 0 ){
+			$qry = "INSERT INTO credits (mobile, credit) VALUES('$billmobile', '$currentlypayingnowa')";
+			$insert = $db->exec($qry);
+			echo true;
+		}else{
+			$sql = "SELECT * FROM credits WHERE mobile='$billmobile'";
+			$qry = $db->query($sql);
+			$rows = $qry->fetchArray();
+			$credit = $rows['credit'];
+			$pending = (float)$currentlypayingnowa + (float)$credit;
+			$sql = "UPDATE credits SET credit='$pending' WHERE mobile='$billmobile'";
+			$update = $db->exec($sql);
+			echo true;				
+		}
+		exit();
+	}
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>e-Way Bill</title>	
+	<script type='text/javascript' src='js/jquery-3.2.1.min.js'></script>
+	
+	<link rel='stylesheet' href='css/jquery-ui.min.css'></link>
+	<link rel='stylesheet' href='css/jquery-ui.structure.min.css'></link>
+	<link rel='stylesheet' href='css/jquery-ui.theme.min.css'></link>	
+	<link rel="stylesheet" href="css/bootstrap.min.css"></link>
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css"></link>
+	
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.cookie.js"></script>
+	<script src="js/create.js"></script>
+	<script src="js/update.js"></script>
+	<script src="js/delete.js"></script>
+	<script src="js/billing.js"></script>
+	<link rel='stylesheet' href='css/desireit.css'></link>
+	
+	<script type='text/javascript' src='js/jquery-ui.min.js'></script>
+
+
+	<style>
+		table td{
+			font-size:11px
+		}
+	</style>
+
+	
+</head>
+<body>
+
+	<div style="padding:5px">
+
+	
+<?php
+	function productcategory($productid, $db){
+		$sql = "SELECT actualprice FROM stock WHERE id='".$productid."'";
+		$get = mysqli_query($db, $sql);
+		$res = mysqli_fetch_array($get);
+		$actualprice = $res['actualprice'];
+			
+		$arrays = array("actualprice"=>$actualprice);		
+		return $arrays;
+	}
+?>
+
+<style>
+	*{
+		padding:0;
+		margin:0
+	}
+	.updateStock{
+		display:none;
+	}
+	.table .table tr, .table .table tr td{
+		border:1px solid black;
+	}
+	table, th, td {
+	border: 1px solid;
+	}
+	
+</style>
+<?php
+	if( isset($_GET['invoice']) ){
+		$invoiceId = $_GET['invoice'];
+		$sql2 = "SELECT * FROM invoices WHERE id='$invoiceId'";
+		$selectInvoice = mysqli_query($db, $sql2);
+		$res = mysqli_fetch_array($selectInvoice);
+		$array = unserialize($res['info']);	
+		$customername = $res["customer"];
+		$customermobile = $res["mobile"];
+		$state = $res["state"];
+		$city = $res["city"];
+		$address = $res["address"];
+		$gst = $res["gst"];
+		$pin = $res["pin"];
+		$dat = $res["date"];
+		$dispatchThrough = $res["dispatchThrough"];
+		$consigneeVehicle = $res["vehicle"];
+		
+		$date = date("d-M-y", strtotime($dat));
+		//print_r($array);
+	}else{
+		echo "
+		<div class='row text-center'>
+			<br>Invoice not found<br>
+			<a href='billing.php' class='btn btn-lg btn-warning'>Billing</a>
+		</div>";
+		exit();
+	}
+	$page = 1;
+?>
+
+<script>
+	$(document).ready(function(){
+		$(".invoiceNumber").html("Doc No. : Tax Invoice - <b><?php echo $invoiceId; ?></b>");
+		$(".invoiceewaybillNumber").html("<b><?php echo $invoiceId; ?></b>");
+		$(".consigneeTo").html("<b><?php echo $customername; ?></b>");
+		$(".consigneeAddress").html("<b><?php echo $address; ?></b>");
+		$(".consigneeCity").html("<b><?php echo $city; ?></b>");
+		$(".consigneeState").html("<b><?php echo $state; ?></b>");
+		$(".consigneeGST").html("<b><?php echo $gst; ?></b>");
+		$(".consigneePin").html("<b><?php echo $pin; ?></b>");
+		$(".billDateIs").html("Date : <b><?php echo $date; ?></b>");
+		$(".dispatchDocNo").html("<b><?php echo $invoiceId; ?></b>");
+		$(".dispatchThrough").html("<b><?php echo $dispatchThrough; ?></b>");
+		$(".consigneeVehicle").html("<b><?php echo $consigneeVehicle; ?></b>");
+		
+		
+	});
+</script>
+			
+			
+			
+			
+		<div>
+		<div class='text-center '>  
+			<?php //$dd = invoiceHeader($db); echo $dd[0]; ?>
+<br>
+<table align="left" border="0" cellpadding="1" cellspacing="1" style="width:100%; border:none">
+	<tbody>
+		<tr>
+			<td style="text-align:center; width:33%; border:none"><strong><span style="font-size:20px">e-Way Bill</span></strong></td>
+		</tr>
+	</tbody>
+</table>
+<div class='text-left'>
+<div class="invoiceNumber">3251</div>
+<div class="billDateIs"></div>
+</div>
+<br />
+<br />
+<table align="left" cellpadding="5" cellspacing="1" style="text-align:left; width:100%">
+	<tbody>
+		<tr>
+			<td style="vertical-align:top; padding:5px"><strong>1. e-Way Bill Details</strong><br />
+				e-Way Bill No. : <br />
+				Generated By : <br />
+				Supply Type : Outward-Supply
+			</td>
+			<td  style="vertical-align:top; padding:5px">
+				Mode : 1 - Road<br />
+				Approx Distance : 200 KM<br />
+				Transaction Type : Regular
+			</td>		
+			<td  style="vertical-align:top; padding:5px">
+				Generated Date : <span class="billDateIs"></span><br />
+				Valid Upto :  <span class="billDateIs"></span><br />
+			</td>
+		
+		</tr>
+</tbody>
+</table>
+<table class='table text-left'>	
+		<tr>
+			<td style="vertical-align:top; padding:5px">2. Address Details<br /><br>
+				From<br>
+				<strong>JVK Entraprises</strong><br />
+			RS.No: 310, D-No : 14-302/5,<br>
+			SVG Market, Rajamahendravaram<br />
+			E.G.D.T (AP)<br /><br>
+			
+			Dispatch From<br />
+			<strong>JVK Entraprises</strong><br />
+			RS.No: 310, D-No : 14-302/5,<br>
+			SVG Market, Rajamahendravaram<br />
+			E.G.D.T (AP)<br />
+		</td>
+			<td style="vertical-align:top; padding:5px">
+				To<br />
+				<strong class="consigneeTo">JVK ENTERPRISES</strong>
+				<div class="consigneeAddress">SVG Market D No 14-302/5<br />
+				RS NO 310 Morampudi Road</div>
+				<span class="consigneeCity">Rajahmundry</span><br>
+				<span>GSTIN/UIN : <span class="consigneeGST">37BDGPJ5829J1Z6</span></span><br>
+				<span>State Name: <span class="consigneeState">Andhra Pradesh</span>, Code: <strong class="consigneePin">37</strong></span>
+			<br><br>
+			Ship To<br />
+				<strong class="consigneeTo">JVK ENTERPRISES</strong>
+				<div class="consigneeAddress">SVG Market D No 14-302/5<br />
+				RS NO 310 Morampudi Road</div>
+				<span class="consigneeCity">Rajahmundry</span><br>
+				<span>GSTIN/UIN : <span class="consigneeGST">37BDGPJ5829J1Z6</span></span><br>
+				<span>State Name: <span class="consigneeState">Andhra Pradesh</span>, Code: <strong class="consigneePin">37</strong></span>
+			
+			</td>
+		</tr>
+</table>
+<table class='table' border='0'>		
+		<tr>
+			<td colspan="2">
+			<div class='stockform billingblock'>				
+			<table class='table table-condensed table-bordered'>
+				<thead>
+					<tr>
+						<th>3. SNo.</th>
+						<th>Description of goods</th>
+						<th class='text-center'>Qty</th>
+						<th class='text-center'>Rate</th>
+						<th class='text-center'>Per</th>
+						<th class='text-center'>Total</th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php
+					$payable = 0;
+					$sno = 1;
+					$records = 1;
+					$gsttotal = 0;
+					$total1 = 0;
+					$gst_tot = 0;
+					$tally1 = 0;
+					$tally2 = 0;
+					$total_qty = 0;
+					for($i=1; $i<count($array); $i++){
+						if( $records>15 ){	
+							$page++;
+							$records = 2;
+							?>
+								</tbody>
+								
+								<tr>
+										<td class='text-center'></td>
+										<td class='text-center'></td>
+										<td class='text-center'></td>
+										<td class='text-center'></td>
+										<td class='text-center'></td>
+										<td class='text-center'>TOTAL</td>
+										<td class='text-center finalpayable'><?php echo $payable; ?> /-</td>
+										<td class='text-center finalpayable'><?php echo $payable; ?> /-</td>
+									</tr>
+									</tbody>
+								</table>
+								<div id='foot'>
+								<?php echo invoiceHeader($db); ?>
+								</div>
+								
+								
+							  </div>
+							</div>
+							<div class='a4 top' valign='top'>		
+								<div class='text-center container top' valign='top'>  
+								<?php echo invoiceHeader($db); ?>
+								<div class='clearfix'></div>
+								<table width='100%' border='1'>
+									<tr>
+										<td style='border:0; text-align:left; width:25%'>Serial No: <?php echo $_GET['invoice']; ?> | page: <?php echo $page; ?><br>
+										Date of Issue: <?php echo date("d, M Y", strtotime(date('Y-m-d'))); ?>
+										</td>
+										<td style='border:0; text-align:center; width:50%; font-size:22px !important; vertical-align:top'><u>BILL OF SUPPLY</u></td>
+										<td style='border:0; text-align:left; width:25%;'>
+											
+											Date of supply: <?php echo date('d, M Y'); ?><br>
+											Place of supply: Rajahmundry
+										</td>
+									</tr>
+								</table>
+								<table width='100%' border='1'>
+									<tr>
+										<td style='text-align:center'>
+											Details of Receiver / Billed to:
+										</td>
+										<td style='text-align:center'>
+											Details of Consignee / Shipped to:
+										</td>
+									</tr>
+									<tr>
+										<td style='text-align:left;'>
+											Name: <?php echo $customername; ?><br>
+											Mobile: <?php echo $customermobile; ?>
+										</td>
+										<td style='text-align:left;'>
+											Name: <?php echo $customername; ?><br>
+											Mobile: <?php echo $customermobile; ?>
+										</td>
+									</tr>
+								</table>			
+							</div><hr>
+							<div class='well stockform billingblock text-left'>				
+								<table class='table table-condensed table-bordered text-left'>
+									<thead>
+										<tr>
+											<th>3. SNo.</th>
+											<th>Description of goods</th>
+											<th class='text-center'>Qty</th>
+											<th class='text-center'>Rate</th>
+											<th class='text-center'>Per</th>
+											<th class='text-center'>Total</th>
+										</tr>
+									</thead>
+									<tbody>
+	
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+				
+				<!-- finished new top -->
+				
+							
+							<?php
+								if( $array[$i] ){
+									$category = $array[$i][0];
+									$categoryid = $array[$i][1];
+									$product = $array[$i][2];
+									$productid = $array[$i][3];
+									$productcategory = productcategory($productid, $db);
+									$qty = $array[$i][4];
+									$total = $qty * $array[$i][5];						
+									$price = $array[$i][6];						
+									$gst = $array[$i][7];						
+									$pricewithgst = $array[$i][8];	
+									$qtyType = $array[$i][11];	
+									$totalgst = $qty * $gst;
+									$payable = $payable + $pricewithgst;	
+									$total_qty = $total_qty+$qty;	
+									$tally1 = $tally1 + $actual_individual_price_total;
+									$tally2 = $tally2 + $gst_tot;
+									$grandtotal = $tally1 + $gsttotal;				
+									echo "
+										<tr>
+											<td>$sno</td>
+											<td>$product</td>
+											<td class='text-center'>$qty $qtyType</td>					
+											<td class='text-center'>$actual_individual_price</td>					
+											<td class='text-center'>$qtyType</td>					
+											<td class='text-center'>$actual_individual_price_total</td>	
+										</tr>							
+									";
+									$sno++;
+								}	
+							}else{
+								if( $array[$i] ){
+									$category = $array[$i][0];
+									$categoryid = $array[$i][1];
+									$product = $array[$i][2];
+									$productid = $array[$i][3];
+									$productcategory = productcategory($productid, $db);
+									$qty = $array[$i][4];
+									$total = $qty * $array[$i][5];						
+									$price = $array[$i][6];						
+									$gst = $array[$i][7];						
+									$pricewithgst = $array[$i][8];	
+									$actual_individual_price = $array[$i][9];	
+									$qtyType = $array[$i][11];	
+									$actual_individual_price_total = $actual_individual_price * $qty;
+									$totalgst = $qty * $gst;
+									$total1 = $total1 + $total;
+									$actual_individual_price_total_value = $actual_individual_price_total + $totalgst;
+									$wgst = $price + $gst;	
+									$wgst2 = $qty * $wgst;	
+									$gsttotal = $gsttotal + ($gst);
+									$gst_tot = $gst_tot+$gst;
+									$payable = $total1 + $gst_tot;
+
+									$total_qty = $total_qty+$qty;
+									
+									$tally1 = $tally1 + $actual_individual_price_total;
+									$tally2 = $tally2 + $gst_tot;
+									$grandtotal = $tally1 + $gsttotal;
+									echo "
+										<tr>
+											<td>$sno</td>
+											<td>$product</td>
+											<td class='text-center'>$qty $qtyType</td>					
+											<td class='text-center'>$actual_individual_price</td>					
+											<td class='text-center'>$qtyType</td>					
+											<td class='text-center'>$actual_individual_price_total</td>										
+										</tr>							
+									";
+									$sno++;
+									$records++;
+								}	
+							}	
+						}
+					
+					?>			
+								
+				<tr>
+					<td class='text-center'></td>
+					<td class='text-right'>Total</td>					
+					<td class='text-center'><?php echo $total_qty; ?></td>
+					<td class='text-center'></td>
+					<td class='text-center'></td>
+					<td class='text-center finalpayabl'><?php echo $grandtotal; ?> /-</td>
+				</tr>
+				</tbody>
+			</table>
+						<table border="0" class='table text-left' valign="top">
+							<tr>
+								<td style="border:none">
+									<p>4. Transportation Details</p>
+									Transporter ID : <br>
+									Name : 
+								</td>
+								<td>
+									Doc No. : <br>
+									Date : 
+								</td>
+							</tr>
+					</table>
+					<table class='table text-left'>	
+							<tr>
+								<td style="border:none">
+									<p>5. Vehicle Details</p>
+									Vehicle No. : <span class='consigneeVehicle'></span><br>
+									
+								</td>
+								<td>
+									From : <span class='consigneeCity'></span>
+								</td>
+								<td>
+									CEWB No. :
+								</td>
+							</tr>
+						</table>
+			
+			
+		  </div>
+		</div>
+			</td>
+
+		</tr>
+	</tbody>
+</table>
+
+
+
+
+
+		
+	
+
+
+<style>
+	.a4{
+		vertical-align:top !important;
+		height:260mm;
+		idth:210mm;
+		eight:100%;
+		osition:relative;
+	}
+	*{
+		font-size:12px;
+	}
+	#foot{
+		
+	}
+	#foot table td span{
+		font-size:10px !important; 
+	}
+</style>
+<div class='text-center'>
+	<button class='btn btn-default btn-sm printme' >Print</button>
+	<!--<div class='form-group partialblock'>
+		<input type='text' class='form-control' value='<?php echo $payable; ?>' data-actual='<?php echo $payable; ?>' id='partialpayingnow'><button class='btn btn-warning btn-sm mypendingbill' data-mobile='<?php echo $customerInfo[1]; ?>' >Pending</button>
+	</div>-->	
+</div>
+<script>
+	$(document).ready(function(){
+		$('.printme').click(function(){
+			$(this).hide();
+			window.print();			
+		});
+		$('.mypendingbill').click(function(){
+			billmobile = $(this).attr('data-mobile');
+			currentlypayingnow = $('#partialpayingnow').val();
+			currentlypayingnowa = $('#partialpayingnow').attr('data-actual');
+			$.post("invoice.php", {billmobile:billmobile, currentlypayingnow:currentlypayingnow, currentlypayingnowa:currentlypayingnowa}, function(res){
+				$('.partialblock').hide();
+			});			
+		});
+		$('.finalpayable').html("<b><?php echo $payable; ?> /-</b>");
+	});
+</script>
+
+

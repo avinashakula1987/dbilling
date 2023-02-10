@@ -178,10 +178,12 @@ $(document).ready(function(){
 		openingBalance = $('#openingBalance').val();		
 		fullPayment = $('#fullPayment').val();		
 		partialPayment = $('#partialPayment').val();	
-		
-		
-		
-
+		returnStatus = $('#returnStatus').is(":checked");
+		if( returnStatus == true ){
+			returnStatus = 1;
+		}else{
+			returnStatus = 0;
+		}
 		totalItemsInBills = $('.addbillingrow').attr('data-id');
 		billingInfo = [];		
 		billTotal = 0;
@@ -200,7 +202,7 @@ $(document).ready(function(){
 		billingInfos = JSON.stringify(billingInfo);		
 
 		if( confirm("Are you sure?") ){
-			$.post('processing.php', {customername:customername, mobile:mobile, state:state, city:city, address:address, pincode:pincode, gst:gst, dispatchThrough:dispatchThrough, vehicle:vehicle, transaction:transaction, billingInfos:billingInfos, billTotal:billTotal, billTotalQty:billTotalQty, billFinalTotal:billFinalTotal, openingBalance:openingBalance, fullPayment:fullPayment, partialPayment:partialPayment}, function(res){			
+			$.post('processing.php', {returnStatus:returnStatus, customername:customername, mobile:mobile, state:state, city:city, address:address, pincode:pincode, gst:gst, dispatchThrough:dispatchThrough, vehicle:vehicle, transaction:transaction, billingInfos:billingInfos, billTotal:billTotal, billTotalQty:billTotalQty, billFinalTotal:billFinalTotal, openingBalance:openingBalance, fullPayment:fullPayment, partialPayment:partialPayment}, function(res){			
 				if( res == true ){
 					location.href='modifyInvoice.php';
 				}else{
@@ -222,6 +224,12 @@ $(document).ready(function(){
 		partialPayment = $('#partialPayment').val();
 		oldInvoiceId = $(this).attr('data-id');
 		totalItemsInBills = $('.addbillingrow').attr('data-id');
+		returnStatus = $('#returnStatus').is(":checked");
+		if( returnStatus == true ){
+			returnStatus = 1;
+		}else{
+			returnStatus = 0;
+		}
 		billingInfo = [];		
 		billTotal = 0;
 		billFinalTotal = 0;
@@ -236,7 +244,7 @@ $(document).ready(function(){
 		}
 		billingInfos = JSON.stringify(billingInfo);
 		if( confirm("Are you sure?") ){
-			$.post('processing.php', {customername:customername, mobile:mobile, updateBillingInfos:billingInfos, oldInvoiceId:oldInvoiceId, billTotal:billTotal, billTotalQty:billTotalQty, billFinalTotal:billFinalTotal, openingBalance:openingBalance, fullPayment:fullPayment, partialPayment:partialPayment}, function(res){			
+			$.post('processing.php', {returnStatus:returnStatus, customername:customername, mobile:mobile, updateBillingInfos:billingInfos, oldInvoiceId:oldInvoiceId, billTotal:billTotal, billTotalQty:billTotalQty, billFinalTotal:billFinalTotal, openingBalance:openingBalance, fullPayment:fullPayment, partialPayment:partialPayment}, function(res){			
 				if( res == true ){
 					location.href='invoice.php?invoice='+oldInvoiceId;
 				}else{

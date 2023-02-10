@@ -35,6 +35,15 @@
 			return false;
 		}
 	}
+	function decreaseOpenBalance($total, $db){				
+		$sql = "UPDATE openingbalance SET balance=balance-'$total' WHERE id='1'";
+		$update = mysqli_query($db, $sql);
+		if( $update ){
+			return true;			
+		}else{
+			return false;
+		}
+	}
 	
 	
 	if( isset($_POST['update_qty']) && isset($_POST['update_product']) && isset($_POST['update_categoryid']) ){
@@ -307,10 +316,11 @@
 		$openingBalance = $_POST['openingBalance'];
 		$fullPayment = $_POST['fullPayment'];
 		$partialPayment = $_POST['partialPayment'];
+		$returnStatus = $_POST['returnStatus'];
 		
 		$billingInfos2 = serialize($billingInfos);
 		$login = $_SESSION['login'];
-		$sql = "INSERT INTO invoices (customer, mobile, info, total, qty, finaltotal, date, status, state, city, address, pin, gst, dispatchThrough, vehicle, transaction, openingBalance, login, fullPayment, partialPayment) VALUES('$customername', '$mobile', '$billingInfos2', '$billTotal', '$billTotalQty', '$billFinalTotal', '".date('Y-m-d')."', '0', '$state', '$city', '$address', '$pincode', '$gst', '$dispatchThrough', '$vehicle', '$transaction', '0', '$login', '$fullPayment', '$partialPayment')";
+		$sql = "INSERT INTO invoices (customer, mobile, info, total, qty, finaltotal, date, status, state, city, address, pin, gst, dispatchThrough, vehicle, transaction, openingBalance, login, fullPayment, partialPayment, returnStatus) VALUES('$customername', '$mobile', '$billingInfos2', '$billTotal', '$billTotalQty', '$billFinalTotal', '".date('Y-m-d')."', '0', '$state', '$city', '$address', '$pincode', '$gst', '$dispatchThrough', '$vehicle', '$transaction', '0', '$login', '$fullPayment', '$partialPayment', '$returnStatus')";
 		$data = mysqli_query($db, $sql);
 		setcookie("modifyInvoice", $db->insert_id);
 		echo true;
@@ -328,14 +338,20 @@
 		$customername = $_POST['customername'];
 		$mobile = $_POST['mobile'];
 		$openingBalance = $_POST['openingBalance'];
+		$returnStatus = $_POST['returnStatus'];
 		// $openBal = $billFinalTotal + $openingBalance;
 		// Check if qty existed
 		//$qtyvalidation = qtyUpdation($billingInfos);
-		$sql = "UPDATE invoices SET customer='$customername', mobile='$mobile', info='$billingInfos2', finaltotal='$billFinalTotal', total='$billTotal', qty='$billTotalQty', status='1', openingBalance='$openingBalance' WHERE id='$oldInvoiceId'";
+		$sql = "UPDATE invoices SET returnStatus='$returnStatus', customer='$customername', mobile='$mobile', info='$billingInfos2', finaltotal='$billFinalTotal', total='$billTotal', qty='$billTotalQty', status='1', openingBalance='$openingBalance' WHERE id='$oldInvoiceId'";
 		mysqli_query($db, $sql);
 		setcookie("modifyInvoice", "",  time() - 3600);
 		// reduceQuantity
-		echo increaseOpenBalance($billFinalTotal, $db);
+		if( $returnStatus == 1 ){
+			echo decreaseOpenBalance($billFinalTotal, $db);		
+		}else{			
+			echo increaseOpenBalance($billFinalTotal, $db);	
+		}
+		
 			
 		exit();
 	}

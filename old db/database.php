@@ -34,35 +34,8 @@
 			$list = $list."<option value='".$res['id']."'>".$res['name']."</option>";
 		}
 		
-		return $list;		
-	}
-
-	// typeofpayment, total, partialpaid
-	function paid_pending($paymentType, $payable, $partialPaid){
-		$pending = 0;
-		$paid = 0;
-		if( $paymentType == "Partial" ){
-			$paid = $partialPaid;
-			$pending = (float)$payable - (float)$paid;
-		}else{
-			$paid = $payable;
-		}
-		$arr = array($paid, $pending);
-		return $arr;
-	}
-
-	function getTransactionDetails($db, $refId){
-		$sql = "SELECT * FROM invoices WHERE id='$refId'";
-		$get = mysqli_query($db, $sql);		
-		$res = mysqli_fetch_array($get);
-		$customer = $res['customer'];
-		$mobile = $res['mobile'];
-		$payable = $res['finaltotal'];
-		$fullPayment = $res['fullPayment'];
-		$partialPayment = $res['partialPayment'];	
-
-		$paid_pending_array = paid_pending($fullPayment, $payable, $partialPayment);
-		return array($customer, $mobile, $paid_pending_array[1]);
+		return $list;
+		
 	}
 	
 	
