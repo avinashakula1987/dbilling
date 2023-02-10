@@ -7,8 +7,8 @@
 	// }
 	// $db = new myDb();
 
-	// $db = mysqli_connect("localhost", "root", "", "dbilling");
-	$db = mysqli_connect("localhost", "dbilling2", "3~M=mr8Hm-KF", "dbilling2");
+	$db = mysqli_connect("localhost", "root", "", "dbilling");
+	// $db = mysqli_connect("localhost", "dbilling2", "3~M=mr8Hm-KF", "dbilling2");
 	
 	function show_category_name($id, $db){
 		$sql = "SELECT * FROM categories WHERE id='".$id."'";

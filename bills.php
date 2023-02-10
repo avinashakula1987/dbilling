@@ -40,7 +40,7 @@
 			
 			<div class='well'>
 				<div class='row'>
-			<form action='invoices.php' method='get'>
+			<form action='bills.php' method='get'>
 				<div class='form-group col-md-2'>
 					<input type='text' name='date1' class='form-control datepicker' placeholder='From Date' />
 				</div>

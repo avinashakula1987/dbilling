@@ -15,6 +15,19 @@
 		}
 	}
 
+	function alreadyexistedQty($qty, $db){
+		$qty = $qty;		
+		$sql = "SELECT COUNT(*) AS count FROM quantity WHERE quantity='$qty'";
+		$existance_check = mysqli_query($db, $sql);
+		$r = mysqli_fetch_array($existance_check);
+		$count = $r['count'];
+		if( $count == 0 ){
+			return true;			
+		}else{
+			return false;
+		}
+	}
+
 
 	
 	function updateexisted($category, $product, $quantity, $db){				
@@ -420,6 +433,37 @@
 		exit();
 	}
 	// creating new stock ends
+
+
+	// New Quantity starts
+	if( isset($_POST['new_quantity']) ){
+		
+		$new_quantity = $_POST['new_quantity'];
+
+		
+		
+
+			
+			$check = alreadyexistedQty($new_quantity, $db);
+						
+			if( $check ){
+				// insert into stock other wise go to else and update the stock qty only
+				$sql2 = "INSERT INTO quantity (quantity, status) VALUES('$new_quantity', '1')";
+				$insert2 = mysqli_query($db, $sql2);
+				if( $insert2 ){
+					$stock_status = true;
+				}else{
+					$stock_status = true;
+				}
+			}else{
+				$stock_status = false;
+			}
+		
+		$array = array("quantity"=>$stock_status);
+		echo json_encode($array);
+		exit();
+	}
+	// New Quantity ends
 	
 	// update old stock starts
 	if( isset($_POST['updatestock_productid']) ){
@@ -440,6 +484,26 @@
 		exit();
 	}
 	// update old stock ends
+
+	
+	// update old stock starts
+	if( isset($_POST['update_quantity']) ){
+		$update_qtyid = $_POST['update_qtyid'];
+		$update_quantity = $_POST['update_quantity'];
+		$sql = "UPDATE quantity SET quantity='$update_quantity' WHERE id='$update_qtyid'";
+		$qry = mysqli_query($db, $sql);
+		if( $qry ){
+			$array = array("stock"=>true);
+		}else{
+			$array = array("stock"=>false);
+		}
+		
+		echo json_encode($array);
+		
+		exit();
+	}
+	// update old stock ends
+
 	
 	// Inactivate stock starts
 	if( isset($_POST['listitem_inactivateid']) ){

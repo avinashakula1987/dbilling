@@ -28,6 +28,7 @@
 			<ul class="nav nav-tabs">
 			  <li role="presentation" class="active"><a href="stock.php">Stock</a></li>
 			  <li role="presentation"><a href="inactive_stock.php">Inactive Stock</a></li>
+			  <li role="presentation"><a href="quantity.php">Quantity</a></li>
 			  <li role="presentation" class='pull-right'><a href="add_stock.php" class='text-danger'>Add Stock</a></li>
 			</ul>
 			

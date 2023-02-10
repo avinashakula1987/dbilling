@@ -181,6 +181,32 @@ $(document).ready(function(){
 		
 	});
 
+	$('#createQuantity').click(function(){
+		
+		new_quantity = $('#quantity').val();		
+		
+		if( 
+			new_quantity != "" && new_quantity.length>0 
+		){
+				$.post("processing.php", {new_quantity:new_quantity}, function(res){
+					let result = JSON.parse(res);
+				
+					if( result.quantity == true ){
+						$('.stockform input').val('');	
+						showDialog("Success", "Quantity successfully created !");
+					}else{
+						showDialog("Failed", "Quantity already existed !");				
+					}	
+				});
+			
+		}else{
+			alert("Provide Quantity");
+		}
+		
+		
+	});
+
+
 
 	function showDialog(header, msg){		
 		$("#modalheadertitle").html(`${header}`);

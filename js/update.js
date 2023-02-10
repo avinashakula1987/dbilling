@@ -101,6 +101,31 @@ $(document).ready(function(){
 			alert();
 		}
 	});
+
+	$(document).on('click', '.update_quantity', function(){		
+		
+		updateexistedstock_id = $(this).attr('data-id');		
+		$('.loadingustock_'+updateexistedstock_id).html("<img src='images/loading.gif'> Please wait");
+		update_quantity = $('#editstock_quantity_'+updateexistedstock_id).val();
+
+	
+		if(  update_quantity!="" ){
+			
+			$.post("processing.php", {update_quantity:update_quantity, update_qtyid:updateexistedstock_id}, function(res){
+				$('.loadingustock_'+updateexistedstock_id).html('');
+				let result = JSON.parse(res);
+				if(  result.stock == true ){
+					$('.loadingustock_'+updateexistedstock_id).html("<span class='text-success'><span class='glyphicon glyphicon-ok'> Updated</span></span>");
+					$('#qty_'+updateexistedstock_id).text(update_quantity);
+				}else{
+					$('.loadingustock_'+updateexistedstock_id).html("<span class='text-danger'><span class='glyphicon glyphicon-remove'> Failed! Try again later!</span></span>");			
+				}	
+			});
+		}else{
+			alert();
+		}
+	});
+	
 	
 	$('.inactivateitem').click(function(){		
 		listitem_inactivateid = $(this).attr('data-id');		
