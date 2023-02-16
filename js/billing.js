@@ -75,7 +75,7 @@ $(document).ready(function(){
 		let id = $(this).attr('data-id');
 		$('.billrow_'+id).remove();
 		// remNewBillRow(totalItemsInBills);		
-		alert(id);
+		// alert(id);
 	});
 	
 	$(document).on('keyup', '.stockcreation_discount', function(){		
@@ -313,11 +313,11 @@ $(document).ready(function(){
 		}
 	});
 	
-	$(document).keyup(function (e) {
-		if (e.keyCode == 46) {
-		    $('.removebillingrow').trigger('click');
-		}
-	});
+	// $(document).keyup(function (e) {
+	// 	if (e.keyCode == 46) {
+	// 	    $('.removebillingrow').trigger('click');
+	// 	}
+	// });
 
 	
 	

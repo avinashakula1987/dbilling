@@ -139,7 +139,7 @@
 					</div>	
 				</div>							
 			</div>	
-			<a class='btn btn-xs btn-warning removebillingrow pull-right' ><span class='glyphicon glyphicon-remove'></span> Remove Item</a>
+			<!-- <a class='btn btn-xs btn-warning removebillingrow pull-right' ><span class='glyphicon glyphicon-remove'></span> Remove Item</a> -->
 			<button id='createBill' class='btn btn-md btn-danger' >Submit</button>
 			
 			

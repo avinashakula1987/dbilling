@@ -18,12 +18,12 @@
 			<h3 class="panel-title">Inactive Stock</h3>
 		  </div>
 		  <div class="panel-body">
-			
-			<ul class="nav nav-tabs">
+		  	<?php include("stock_nav.php"); ?>
+			<!-- <ul class="nav nav-tabs">
 			  <li role="presentation"><a href="stock.php">Stock</a></li>
 			  <li role="presentation" class="active"><a href="inactive_stock.php">Inactive Stock</a></li>
 			  <li role="presentation" class='pull-right'><a href="add_stock.php" class='text-danger'>Add Stock</a></li>
-			</ul>
+			</ul> -->
 			
 			<div class='well'>
 				<div class='table-responsive'>
@@ -31,7 +31,6 @@
 					<thead>
 						<th>S No.</th>
 						<th>Title</th>
-						<th>Quantity</th>
 						<th>Price</th>
 						<th>Actions</th>
 					</thead>
@@ -45,23 +44,17 @@
 								while( $res = mysqli_fetch_array($get) ){
 									$id = $res['id'];
 									$name = $res['name'];
-									$qty = $res['qty'];
 									$actualprice = $res['actualprice'];
-									
-									
-									if( $res['status'] == "0" ){
-										$stat = "<a class='btn btn-xs btn-success activateitem' data-id='$id' ><span class='glyphicon glyphicon-eye-open'></span> Activate</a>";
-									}
+									$stat = "<a class='btn btn-xs btn-warning activateitem' data-name='stock' data-id='$id' ><span class='glyphicon glyphicon-eye-close'></span></a>";
 									echo "<tr id='row_$id'>";
 									echo "<td>$sno</td>";
 									echo "<td id='name_$id'>$name</td>";
-									echo "<td id='qty_$id'>$qty</td>";
 									echo "<td id='actualprice_$id'>$actualprice</td>";
 
 
 									echo "<td>
 											$stat
-											<a class='btn btn-xs btn-info' data-toggle='modal' data-target='#edit_$id'><span class='glyphicon glyphicon-pencil'></span> Edit</a> 
+											<a class='btn btn-xs btn-info' data-toggle='modal' data-target='#edit_$id'><span class='glyphicon glyphicon-pencil'></span></a> 
 
 											<div id='edit_$id' class='modal fade' role='dialog'>
 											  <div class='modal-dialog'>
@@ -102,7 +95,7 @@
 											  </div>
 											</div>
 
-											<a href='$id' class='btn btn-xs btn-danger del_stock' onclick='return false;'><span class='glyphicon glyphicon-remove'></span> Delete</a></td>";
+											<a href='$id' class='btn btn-xs btn-danger del_stock' onclick='return false;'><span class='glyphicon glyphicon-remove'></span></a></td>";
 									echo "</tr>";
 									$sno++;
 								}

@@ -9,14 +9,14 @@
 	<div class='row'>
 		<div class="panel panel-primary mainbody">
 		  <div class="panel-heading">
-			<h3 class="panel-title">Add Purchased Stock</h3>
+			<h3 class="panel-title">New Stock</h3>
 		  </div>
 		  <div class="panel-body">
-			
-			<ul class="nav nav-tabs">
+		  	<?php include("stock_nav.php"); ?>
+			<!-- <ul class="nav nav-tabs">
 			  <li role="presentation"><a href="purchases.php">Purchased Stock</a></li>
 			  <li role="presentation" class='pull-right active'><a href="add_stock.php" class='text-danger'>Add Purchased Stock</a></li>
-			</ul>
+			</ul> -->
 			
 			<style>
 				.updateStock{
@@ -32,31 +32,7 @@
 					</div>
 					
 				</div>
-				<div class='clearfix'></div>
-
-				<div class='row'>					
-					
-					<div class='form-group col-md-3'>
-						<label>Qty</label><br>
-						<select id='quantity' class='form-control' >
-							<option value="">Select</option>
-							<?php
-								$sql = "SELECT * FROM quantity WHERE status='1' ORDER BY id DESC";
-								$get = mysqli_query($db, $sql);
-								$sno = 1;
-								while( $res = mysqli_fetch_array($get) ){
-									$id = $res['id'];
-									$quantity = $res['quantity'];
-									echo "<option value='$quantity'>$quantity</option>";
-								}	
-							?>
-							
-						</select>
-					</div>
-					
-				</div>
-				<div class='clearfix'></div>
-				
+				<div class='clearfix'></div>				
 				<div class='row'>					
 					<div class='form-group   col-md-3 text-left'>
 						<label>Amount</label><br>

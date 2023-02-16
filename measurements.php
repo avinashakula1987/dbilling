@@ -9,14 +9,14 @@
 	<div class='row'>
 		<div class="panel panel-primary mainbody">
 		  <div class="panel-heading">
-			<h3 class="panel-title">Add Purchased Stock</h3>
+			<h3 class="panel-title">Measurements</h3>
 		  </div>
 		  <div class="panel-body">
-			
-			<ul class="nav nav-tabs">
+		  <?php include("stock_nav.php"); ?>
+			<!-- <ul class="nav nav-tabs">
 			  <li role="presentation"><a href="purchases.php">Purchased Stock</a></li>
 			  <li role="presentation" class='pull-right active'><a href="add_stock.php" class='text-danger'>Add Purchased Stock</a></li>
-			</ul>
+			</ul> -->
 			
 			<style>
 				.updateStock{
@@ -28,12 +28,12 @@
 				
 				<div class='row'>					
 					<div class='form-group   col-md-3 text-left'>
-						<label>Amount</label><br>
-						<input type='text' id='quantity' class='form-control dontstay' placeholder='Quantity' />					
+						<label>Measurement</label><br>
+						<input type='text' id='quantity' class='form-control dontstay' placeholder='Measurement' />					
 					</div>
 				</div>	
 				
-				<button id='createQuantity' class='btn btn-md btn-info' >Create Quantity</button>			
+				<button id='createQuantity' class='btn btn-md btn-info' >Create Measurement</button>			
 			</div>	
 
 			<div class='well'>
@@ -41,31 +41,26 @@
 				<table class='table table-condensed' id='datatables'>
 					<thead>
 						<th>S No.</th>
-						<th>Quantity</th>
+						<th>Measurement</th>
 						<th>Actions</th>
 					</thead>
 					<tbody>
 						<?php 
-							$sql = "SELECT * FROM quantity ORDER BY id DESC";
+							$sql = "SELECT * FROM quantity WHERE status='1' ORDER BY id DESC";
 							$get = mysqli_query($db, $sql);
 								$sno = 1;
 								while( $res = mysqli_fetch_array($get) ){
 									$id = $res['id'];
-									$quantity = $res['quantity'];
-									
-									
-									if( $res['status'] == "1" ){
-										$stat = "<a class='btn btn-xs btn-primary inactivateitem' data-id='$id' ><span class='glyphicon glyphicon-eye-close'></span> Inactivate</a>";
-									}
+									$quantity = $res['quantity'];									
+									$stat = "<a class='btn btn-xs btn-success inactivateitem' data-name='measurements' data-id='$id' ><span class='glyphicon glyphicon-eye-open'></span></a>";
 									echo "<tr id='row_$id'>";
 									echo "<td>$sno</td>";
 									echo "<td id='qty_$id'>$quantity</td>";
 
 									echo "<td>
 											$stat
-											<a class='btn btn-xs btn-info' data-toggle='modal' data-target='#edit_$id'><span class='glyphicon glyphicon-pencil'></span> Edit</a> 
+											<a class='btn btn-xs btn-info' data-toggle='modal' data-target='#edit_$id'><span class='glyphicon glyphicon-pencil'></span></a> 
 											
-											<a class='btn btn-xs btn-warning' href='trackers.php?id=$id'><span class='glyphicon glyphicon-pencil'></span> Trackers</a> 
 
 											<div id='edit_$id' class='modal fade' role='dialog'>
 											  <div class='modal-dialog'>
@@ -95,7 +90,7 @@
 											  </div>
 											</div>
 
-											<a href='$id' class='btn btn-xs btn-danger del_stock' onclick='return false;'><span class='glyphicon glyphicon-remove'></span> Delete</a></td>";
+											<a href='$id' class='btn btn-xs btn-danger del_stock' data-name='measurements' onclick='return false;'><span class='glyphicon glyphicon-remove'></span></a></td>";
 									echo "</tr>";
 									$sno++;
 								}

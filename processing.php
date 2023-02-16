@@ -297,7 +297,17 @@
 	
 	if( isset($_POST['listcategory_did'])){
 		$listcategory_did = $_POST['listcategory_did'];
-		$sql = "DELETE FROM stock WHERE id='$listcategory_did'";
+		$listcategory_did_name = $_POST['listcategory_did_name'];
+
+		if( $listcategory_did_name == "stock" ){
+			$table = "stock";
+		}else if($listcategory_did_name == "measurements"){
+			$table = "quantity";
+
+		}
+
+
+		$sql = "DELETE FROM $table WHERE id='$listcategory_did'";
 		mysqli_query($db, $sql);
 		echo true;			
 		exit();
@@ -407,7 +417,6 @@
 	if( isset($_POST['newstock_productname']) ){
 		
 		$newstock_productname = $_POST['newstock_productname'];
-		$newstock_quantity = $_POST['newstock_quantity'];
 		$newstock_price = $_POST['newstock_price'];
 
 		
@@ -418,7 +427,7 @@
 						
 			if( $check ){
 				// insert into stock other wise go to else and update the stock qty only
-				$sql2 = "INSERT INTO stock (name, qty, actualprice, date, status) VALUES('$newstock_productname', '$newstock_quantity', '$newstock_price', ".date('Y-m-d').", '1')";
+				$sql2 = "INSERT INTO stock (name, actualprice, date, status) VALUES('$newstock_productname', '$newstock_price', ".date('Y-m-d').", '1')";
 				$insert2 = mysqli_query($db, $sql2);
 				if( $insert2 ){
 					$stock_status = true;
@@ -470,9 +479,8 @@
 	if( isset($_POST['updatestock_productid']) ){
 		$updatestock_productid = $_POST['updatestock_productid'];
 		$updatestock_productname = $_POST['updatestock_stock'];
-		$updatestock_quantity = $_POST['updatestock_qty'];
 		$updatestock_price = $_POST['updatestock_price'];		
-		$sql = "UPDATE stock SET name='$updatestock_productname', qty='$updatestock_quantity', actualprice='$updatestock_price' WHERE id='$updatestock_productid'";
+		$sql = "UPDATE stock SET name='$updatestock_productname', actualprice='$updatestock_price' WHERE id='$updatestock_productid'";
 		$qry = mysqli_query($db, $sql);
 		if( $qry ){
 			$array = array("stock"=>true);
@@ -510,7 +518,15 @@
 	if( isset($_POST['listitem_inactivateid']) ){
 		$listitem_inactivateid = $_POST['listitem_inactivateid'];
 		$listitemstate_inactivateid = $_POST['listitemstate_inactivateid'];
-		$sql = "UPDATE stock SET status='$listitemstate_inactivateid' WHERE id='$listitem_inactivateid'";
+		$listitem_inactivate_name = $_POST['listitem_inactivate_name'];
+
+		if( $listitem_inactivate_name == "stock" ){
+			$table = "stock";
+		}else if($listitem_inactivate_name == "measurements"){
+			$table = "quantity";
+
+		}
+		$sql = "UPDATE $table SET status='$listitemstate_inactivateid' WHERE id='$listitem_inactivateid'";
 		$update =mysqli_query($db, $sql);		
 		echo true;		
 		exit();
@@ -520,7 +536,15 @@
 	if( isset($_POST['listitem_activateid']) ){
 		$listitem_activateid = $_POST['listitem_activateid'];
 		$listitemstate_activateid = $_POST['listitemstate_activateid'];
-		$sql = "UPDATE stock SET status='$listitemstate_activateid' WHERE id='$listitem_activateid'";
+		$listitem_inactivate_name = $_POST['listitem_inactivate_name'];
+
+		if( $listitem_inactivate_name == "stock" ){
+			$table = "stock";
+		}else if($listitem_inactivate_name == "measurements"){
+			$table = "quantity";
+
+		}
+		$sql = "UPDATE $table SET status='$listitemstate_activateid' WHERE id='$listitem_activateid'";
 		$update = mysqli_query($db, $sql);
 		echo true;		
 		exit();

@@ -71,8 +71,9 @@ $(document).ready(function(){
 	
 	$('.del_stock').click(function(){		
 		listcategory_did = $(this).attr('href');		
+		listcategory_did_name = $(this).attr('data-name');	
 		if(  confirm("Are you sure ?") ){
-			$.post("processing.php", {listcategory_did:listcategory_did}, function(res){
+			$.post("processing.php", {listcategory_did:listcategory_did, listcategory_did_name:listcategory_did_name}, function(res){
 				if( res == true ){
 					$('#row_'+listcategory_did).hide();
 				}else{

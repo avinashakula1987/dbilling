@@ -156,14 +156,12 @@ $(document).ready(function(){
 	$('#createStock').click(function(){
 		
 		newstock_productname = $('#product').val();
-		newstock_quantity = $('#quantity').val();		
 		newstock_price = $('#individualnetprice').val();		
 		
 		if( 
 			newstock_productname != "" && newstock_productname.length>0 
-			&& newstock_quantity != "" && newstock_quantity.length>0 
 		){
-				$.post("processing.php", {newstock_productname:newstock_productname, newstock_quantity:newstock_quantity, newstock_price:newstock_price}, function(res){
+				$.post("processing.php", {newstock_productname:newstock_productname, newstock_price:newstock_price}, function(res){
 					let result = JSON.parse(res);
 				
 					if( result.stock == true ){

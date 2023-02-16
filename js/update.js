@@ -79,19 +79,17 @@ $(document).ready(function(){
 		updateexistedstock_id = $(this).attr('data-id');		
 		$('.loadingustock_'+updateexistedstock_id).html("<img src='images/loading.gif'> Please wait");
 		updatestock_stock = $('#editstock_title_'+updateexistedstock_id).val();
-		updatestock_qty = $('#editstock_quantity_'+updateexistedstock_id).val();
 		updatestock_price = $('#editstock_actualprice_'+updateexistedstock_id).val();
 
 	
-		if(  updatestock_stock!="" && updatestock_stock!="" && updatestock_qty!="" && updatestock_price!="" ){
+		if(  updatestock_stock!="" && updatestock_stock!="" && updatestock_price!="" ){
 			
-			$.post("processing.php", {updatestock_productid:updateexistedstock_id, updatestock_price:updatestock_price, updatestock_qty:updatestock_qty, updatestock_stock:updatestock_stock}, function(res){
+			$.post("processing.php", {updatestock_productid:updateexistedstock_id, updatestock_price:updatestock_price, updatestock_stock:updatestock_stock}, function(res){
 				$('.loadingustock_'+updateexistedstock_id).html('');
 				let result = JSON.parse(res);
 				if(  result.stock == true ){
 					$('.loadingustock_'+updateexistedstock_id).html("<span class='text-success'><span class='glyphicon glyphicon-ok'> Updated</span></span>");
 					$('#name_'+updateexistedstock_id).text(updatestock_stock);
-					$('#qty_'+updateexistedstock_id).text(updatestock_qty);
 					$('#actualprice_'+updateexistedstock_id).text(updatestock_price);
 				}else{
 					$('.loadingustock_'+updateexistedstock_id).html("<span class='text-danger'><span class='glyphicon glyphicon-remove'> Failed! Try again later!</span></span>");			
@@ -129,8 +127,9 @@ $(document).ready(function(){
 	
 	$('.inactivateitem').click(function(){		
 		listitem_inactivateid = $(this).attr('data-id');		
+		listitem_inactivate_name = $(this).attr('data-name');		
 		if(  confirm("Are you sure ?") ){
-			$.post("processing.php", {listitem_inactivateid:listitem_inactivateid, listitemstate_inactivateid:0}, function(res){
+			$.post("processing.php", {listitem_inactivateid:listitem_inactivateid, listitemstate_inactivateid:0, listitem_inactivate_name:listitem_inactivate_name}, function(res){
 				if( res == true ){
 					alert("Inactivated");
 					$('#row_'+listitem_inactivateid).hide();
@@ -141,9 +140,10 @@ $(document).ready(function(){
 		}
 	});
 	$('.activateitem').click(function(){		
-		listitem_activateid = $(this).attr('data-id');		
+		listitem_activateid = $(this).attr('data-id');	
+		listitem_inactivate_name = $(this).attr('data-name');	
 		if(  confirm("Are you sure ?") ){
-			$.post("processing.php", {listitem_activateid:listitem_activateid, listitemstate_activateid:1}, function(res){
+			$.post("processing.php", {listitem_activateid:listitem_activateid, listitemstate_activateid:1, listitem_inactivate_name:listitem_inactivate_name}, function(res){
 				if( res == true ){
 					alert("Item Activated Again");
 					$('#row_'+listitem_activateid).hide();
