@@ -20,7 +20,7 @@ $(document).ready(function(){
 					<input type='text' id='${`billingdiscount_`+itemIdinBill}' data-id='${itemIdinBill}' class='form-control billingdiscount' value='0' placeholder='Discount' />
 				</div>
 				<div class='form-group col-md-2 col-sm-2 col-xs-2 row'>
-					<input type='text' id='${`billingprice_`+itemIdinBill}' data-id='${itemIdinBill}' class='form-control billingprice' placeholder='Price' />
+					<input type='text' id='${`billingprice_`+itemIdinBill}' data-id='${itemIdinBill}' readonly class='form-control billingprice' placeholder='Price' />
 				</div>
 				<div class='form-group col-md-2 col-sm-2 col-xs-2 row'>
 					<input type='text' id='${`billingwithgstprice_`+itemIdinBill}' data-id='${itemIdinBill}' class='form-control billingwithgstprice' placeholder='Total' />
@@ -97,6 +97,8 @@ $(document).ready(function(){
 		billingrowqty = $('#billingqty_'+billingdiscountrow).val();
 		billrowtot = billingrowqty * finalamount;
 		$('#billingwithgstprice_'+billingdiscountrow).val(billrowtot.toFixed(2));
+
+		updateTotalBillAmount();
 	});
 	
 	
@@ -124,6 +126,8 @@ $(document).ready(function(){
 		$('#billingprice_'+billing_rowid).val(billing_rowprice2-discountPrice);
 		finalIndividualTotal = billing_rowtotal;
 		$('#billingwithgstprice_'+billing_rowid).val(finalIndividualTotal.toFixed(2));
+
+		updateTotalBillAmount();
 		
 	});
 
@@ -149,8 +153,21 @@ $(document).ready(function(){
 		$('#billingprice_'+billing_rowid).val(billing_rowprice2-discountPrice);
 		finalIndividualTotal = billing_rowtotal;
 		$('#billingwithgstprice_'+billing_rowid).val(finalIndividualTotal.toFixed(2));
+
+		updateTotalBillAmount();
 		
 	});
+
+	function updateTotalBillAmount(){
+		let totalItemsInBills = $('.addbillingrow').attr('data-id');
+		let billFinalTotal = 0;
+		for( i=1; i<=totalItemsInBills; i++ ){
+			if( $('#billingproduct_'+i).val() ){				
+				billFinalTotal = parseFloat(billFinalTotal) + parseFloat($('#billingwithgstprice_'+i).val());				
+			}
+		}
+		$('#finalBillAmount').html(billFinalTotal);
+	}
 
 	
 	$('#fullPayment').change(function(){
@@ -319,7 +336,9 @@ $(document).ready(function(){
 	// 	}
 	// });
 
+
 	
+
 	
 	
 });

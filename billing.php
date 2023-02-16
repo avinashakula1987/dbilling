@@ -7,7 +7,7 @@
 	<div class='row'>
 		<div class="panel panel-primary mainbody">
 		  <div class="panel-heading">
-			<h3 class="panel-title">Billing<small class='pull-right' style='font-size:0.8em'>'Enter' for new row || 'Delete' to remove last row</small></h3>
+			<h3 class="panel-title">Billing<small class='pull-right' style='font-size:0.8em'>'Enter' for new row</small></h3>
 		  </div>
 		  <div class="panel-body">
 			<?php include("billing_nav.php"); ?>
@@ -139,6 +139,7 @@
 					</div>	
 				</div>							
 			</div>	
+			<div class='well'>Total - <b id='finalBillAmount'></b></div>
 			<!-- <a class='btn btn-xs btn-warning removebillingrow pull-right' ><span class='glyphicon glyphicon-remove'></span> Remove Item</a> -->
 			<button id='createBill' class='btn btn-md btn-danger' >Submit</button>
 			

@@ -152,17 +152,18 @@
 						</div>
 						<div class='form-group col-md-2 col-sm-2 col-xs-2 row'>
 							Amount
-						</div>
-						
+						</div>						
 						<div class='form-group col-md-2 col-sm-2 col-xs-2 row'>
 							Total
 						</div>
+						<div class='form-group col-md-1 col-sm-1 col-xs-1 row'></div>
 				</div>	
 				
 				<?php
 					// print_r($array);
 					for($i=1; $i<count($array); $i++){
 						if( $array[$i] ){
+							// print_r($array[$i]);
 							$category = $array[$i][0];
 							$categoryid = $array[$i][1];
 							$product = $array[$i][2];
@@ -172,11 +173,11 @@
 							$price = $array[$i][8];						
 							$totalprice = $array[$i][7];						
 							$aprice = $array[$i][5];						
-							$disc = $array[$i][9];						
+							$disc = $array[$i][10];						
 							$qtyType = $array[$i][11];						
 							$existedqty = productExistedQty($productid, $db);						
 							echo "
-							<div clas='row'>
+							<div clas='ro billrow_1'>
 								
 								<div class='form-group col-md-3 col-sm-3 col-xs-3 row'>
 									<input type='text' id='billingproduct_$i' data-id='$i' class='form-control stock_dropdown_billing' hiddenid='$productid' value='$product' placeholder='Product' />
@@ -191,14 +192,17 @@
 									<input type='text' id='billingactualprice_$i' data-id='$i' value='$aprice' class='form-control billingactualprice' actual-price='$aprice' placeholder='Actual Price' />
 								</div>
 								<div class='form-group col-md-1 col-sm-1 col-xs-1 row'>
-									<input type='text' id='billingdiscount_$i' data-id='$i' value='$disc' readonly disabled class='form-control billingdiscount' placeholder='Discount' />
+									<input type='text' id='billingdiscount_$i' data-id='$i' value='$disc' class='form-control billingdiscount' placeholder='Discount' />
 								</div>
 								<div class='form-group col-md-2 col-sm-2 col-xs-2 row'>
 									<input type='text' id='billingprice_$i' data-id='$i' value='$price' class='form-control billingprice' actual-price='$price' placeholder='Price' />
 								</div>
 								
 								<div class='form-group col-md-2 col-sm-2 col-xs-2 row'>
-									<input type='text' id='billingwithgstprice_$i' data-id='$i' value='$price' class='form-control billingprice' actual-price='$price' placeholder='Price' />
+									<input type='text' id='billingwithgstprice_$i' data-id='$i' value='$price' class='form-control billingwithgstprice' actual-price='$price' placeholder='Total' />
+								</div>
+								<div class='form-group col-md-1 col-sm-1 col-xs-1 row'>
+									<a class='removeIndividualRow btn btn-md btn-danger' data-id='1' id='removeIndividualRow_1'>X</a>
 								</div>
 							</div>	
 							";

@@ -116,11 +116,11 @@
 									echo "<td>".$paid_pending_array[0]."</td>";									
 									echo "<td class='text-danger'><strong>".$paid_pending_array[1]."</strong></td>";									
 									echo "<td><a class='btn btn-xs btn-warning' href='modifyInvoice.php?modifyInvoice=$id'><span class='glyphicon glyphicon-pencil'></span></a> ";
-									echo "<a class='btn btn-xs btn-info' href='invoice.php?invoice=$id'><span class='glyphicon glyphicon-zoom-in'></span></a> ";
+									echo "<a class='btn btn-xs btn-info' href='invoice.php?invoice=$id'><span class='glyphicon glyphicon glyphicon-paperclip'></span></a> ";									
+									echo " <a class='btn btn-xs btn-primary' href='partialPayment.php?invoice=$id'><span class='glyphicon glyphicon-plus'></span></a>";
 									if( $_SESSION['loginid'] == 1 ){
-										echo "<a href='$id' class='btn btn-xs btn-danger del_invoice' onclick='return false;'><span class='glyphicon glyphicon-remove'></span></a>";
+										echo " <a href='$id' class='btn btn-xs btn-danger del_invoice' onclick='return false;'><span class='glyphicon glyphicon-remove'></span></a></td>";
 									}
-									echo " <a class='btn btn-xs btn-primary' href='partialPayment.php?invoice=$id'><span class='glyphicon glyphicon-plus'></span></a></td>";
 									echo "</tr>";
 									$sno++;
 								}
