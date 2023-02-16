@@ -225,6 +225,7 @@ $(document).ready(function(){
 		oldInvoiceId = $(this).attr('data-id');
 		totalItemsInBills = $('.addbillingrow').attr('data-id');
 		returnStatus = $('#returnStatus').is(":checked");
+		transaction = $('#transaction').val();
 		if( returnStatus == true ){
 			returnStatus = 1;
 		}else{
@@ -244,7 +245,7 @@ $(document).ready(function(){
 		}
 		billingInfos = JSON.stringify(billingInfo);
 		if( confirm("Are you sure?") ){
-			$.post('processing.php', {returnStatus:returnStatus, customername:customername, mobile:mobile, updateBillingInfos:billingInfos, oldInvoiceId:oldInvoiceId, billTotal:billTotal, billTotalQty:billTotalQty, billFinalTotal:billFinalTotal, openingBalance:openingBalance, fullPayment:fullPayment, partialPayment:partialPayment}, function(res){			
+			$.post('processing.php', {returnStatus:returnStatus, customername:customername, mobile:mobile, updateBillingInfos:billingInfos, transaction:transaction, oldInvoiceId:oldInvoiceId, billTotal:billTotal, billTotalQty:billTotalQty, billFinalTotal:billFinalTotal, openingBalance:openingBalance, fullPayment:fullPayment, partialPayment:partialPayment}, function(res){			
 				if( res == true ){
 					location.href='invoice.php?invoice='+oldInvoiceId;
 				}else{

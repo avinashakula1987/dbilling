@@ -40,7 +40,7 @@
 		}
 	}
 	function increaseOpenBalance($total, $db){				
-		$sql = "UPDATE openingbalance SET balance=balance+'$total' WHERE id='1'";
+		$sql = "UPDATE openingbalance SET `balance`=`balance`+'$total' WHERE id='1'";
 		$update = mysqli_query($db, $sql);
 		if( $update ){
 			return true;			
@@ -49,7 +49,7 @@
 		}
 	}
 	function decreaseOpenBalance($total, $db){				
-		$sql = "UPDATE openingbalance SET balance=balance-'$total' WHERE id='1'";
+		$sql = "UPDATE openingbalance SET `balance`=`balance`-'$total' WHERE id='1'";
 		$update = mysqli_query($db, $sql);
 		if( $update ){
 			return true;			
@@ -352,6 +352,7 @@
 		$mobile = $_POST['mobile'];
 		$openingBalance = $_POST['openingBalance'];
 		$returnStatus = $_POST['returnStatus'];
+		$transaction = $_POST['transaction'];
 		// $openBal = $billFinalTotal + $openingBalance;
 		// Check if qty existed
 		//$qtyvalidation = qtyUpdation($billingInfos);
@@ -359,7 +360,7 @@
 		mysqli_query($db, $sql);
 		setcookie("modifyInvoice", "",  time() - 3600);
 		// reduceQuantity
-		if( $returnStatus == 1 ){
+		if( $transaction == "Out" ){
 			echo decreaseOpenBalance($billFinalTotal, $db);		
 		}else{			
 			echo increaseOpenBalance($billFinalTotal, $db);	

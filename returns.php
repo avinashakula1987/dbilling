@@ -31,7 +31,8 @@
 			   <li role="presentation"><a href="invoices.php">All Transactions</a></li>
 			  <li role="presentation"><a href="bills.php">Bills</a></li>
 			  <li role="presentation"><a href="purchases.php">Purchases</a></li>
-			  <li role="presentation" class="active"><a href="credits.php">Pending Credits</a></li>
+			  <li role="presentation" class="active"><a href="returns.php">Returns</a></li>
+			  <li role="presentation"><a href="credits.php">Pending Credits</a></li>
 			  <li role="presentation"><a href="completedCredits.php">Completed Credits</a></li>
 			  <li role="presentation"><a href="pending_invoices.php">Pending</a></li>
 			  <li role="presentation"><a href="failed_invoices.php">Failed</a></li>
@@ -40,7 +41,7 @@
 			
 			<div class='well'>
 				<div class='row'>
-			<form action='credits.php' method='get'>
+			<form action='returns.php' method='get'>
 				<div class='form-group col-md-2'>
 					<input type='text' name='date1' class='form-control datepicker' placeholder='From Date' />
 				</div>
@@ -68,23 +69,21 @@
 					</thead>
 					<tbody>
 						<?php 
-							$login = $_SESSION['login'];
 							if( isset($_GET['submit']) ){
 								$date1 = mysqli_real_escape_string($db, $_GET['date1']);
 								$date2 = mysqli_real_escape_string($db, $_GET['date2']);
 								if( !empty($date1) && !empty($date2) ){
 									
-									$qry = "WHERE (`date` BETWEEN '$date1' AND '$date2') AND status='1' AND transaction='In' AND fullPayment='Partial' AND clearanceStatus='0' AND login='$login'";
+									$qry = "WHERE (`date` BETWEEN '$date1' AND '$date2') AND status='1' AND transaction='Out' AND returnStatus='1'";
 								}else{
-									$qry = "WHERE status='1' AND transaction='In' AND clearanceStatus='0' AND fullPayment='Partial' AND login='$login'";
+									$qry = "WHERE status='1' AND transaction='Out' AND returnStatus='1'";
 								}
 							}else{
-								$qry = "WHERE date='".date('Y-m-d')."' AND status='1' AND transaction='In'AND clearanceStatus='0' AND fullPayment='Partial' AND login='$login'";
+								$qry = "WHERE date='".date('Y-m-d')."' AND status='1' AND transaction='Out' AND returnStatus='1'";
 							}	
 							$sql = "SELECT * FROM invoices $qry ORDER BY id DESC";
 							$get = mysqli_query($db, $sql);
 								$sno = 1;
-								
 								while( $res = mysqli_fetch_array($get) ){
 									$id = $res['id'];
 									$customer = $res['customer'];
@@ -97,30 +96,20 @@
 									$payable = $res['finaltotal'];
 									$fullPayment = $res['fullPayment'];
 									$partialPayment = $res['partialPayment'];									
-									$refId = $res['refId'];		
-									$customerInfo = "";
-									if( $refId > 0 ){
-										$getTransactionDetails = getTransactionDetails($db, $refId);
-										$customerInfo = $getTransactionDetails[0].", <br>".$getTransactionDetails[1]."<br><i class='text-danger'>Reference of #$refId</i>";
-										$total = $getTransactionDetails[2];
-									}else{
-										$customerInfo = "$customer<br>$mobile";
-									}						
 									$paid_pending_array = paid_pending($fullPayment, $payable, $partialPayment);
 									echo "<tr id='row_$id'>";
 									echo "<td>#$id</td>";
-									echo "<td>$customerInfo</td>";
+									echo "<td>$customer, <br>$mobile</td>";
 									echo "<td>$date</td>";
 									echo "<td>$qty</td>";
 									echo "<td>$total</td>";
 									echo "<td>".$paid_pending_array[0]."</td>";									
-									echo "<td class='text-danger'><strong>".$paid_pending_array[1]."</strong></td>";									
+									echo "<td class='text-danger'><strong>".$paid_pending_array[1]."</strong></td>";											
 									echo "<td><a class='btn btn-xs btn-warning' href='modifyInvoice.php?modifyInvoice=$id'><span class='glyphicon glyphicon-pencil'></span></a> ";
 									echo "<a class='btn btn-xs btn-info' href='invoice.php?invoice=$id'><span class='glyphicon glyphicon-zoom-in'></span></a> ";
 									if( $_SESSION['loginid'] == 1 ){
-										echo "<a href='$id' class='btn btn-xs btn-danger del_invoice' onclick='return false;'><span class='glyphicon glyphicon-remove'></span></a>";
+										echo "<a href='$id' class='btn btn-xs btn-danger del_invoice' onclick='return false;'><span class='glyphicon glyphicon-remove'></span></a></td>";
 									}
-									echo " <a class='btn btn-xs btn-primary' href='partialPayment.php?invoice=$id'><span class='glyphicon glyphicon-plus'></span></a></td>";
 									echo "</tr>";
 									$sno++;
 								}

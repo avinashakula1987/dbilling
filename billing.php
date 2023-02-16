@@ -10,17 +10,18 @@
 			<h3 class="panel-title">Billing<small class='pull-right' style='font-size:0.8em'>'Enter' for new row || 'Delete' to remove last row</small></h3>
 		  </div>
 		  <div class="panel-body">
-			
-			<ul class="nav nav-tabs">
+			<?php include("billing_nav.php"); ?>
+			<!-- <ul class="nav nav-tabs">
 			  <li role="presentation" class='active'><a href="billing.php">Billing</a></li>
 			  <li role="presentation"><a href="invoices.php">All Transactions</a></li>
 			  <li role="presentation"><a href="bills.php">Bills</a></li>
 			  <li role="presentation"><a href="purchases.php">Purchases</a></li>
+			  <li role="presentation"><a href="returns.php">Returns</a></li>
 			  <li role="presentation"><a href="credits.php">Pending Credits</a></li>
 			  <li role="presentation"><a href="completedCredits.php">Completed Credits</a></li>
 			  <li role="presentation"><a href="pending_invoices.php">Pending</a></li>
 			  <li role="presentation"><a href="failed_invoices.php">Failed</a></li>
-			</ul>
+			</ul> -->
 			
 			<style>
 				.updateStock{
@@ -84,6 +85,7 @@
 					</div>
 					
 				</div>
+				<hr />
 				<div class=''>
 					<div clas='row'>
 						<div class='form-group col-md-3 col-sm-3 col-xs-3 row'>
@@ -107,6 +109,7 @@
 						<div class='form-group col-md-2 col-sm-2 col-xs-2 row'>
 							Total
 						</div>
+						<div class='form-group col-md-1 col-sm-1 col-xs-1 row'></div>
 					</div>	
 					<div class='ro billrow_1'>						
 						<div class='form-group col-md-3 col-sm-3 col-xs-3 row'>

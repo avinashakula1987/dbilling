@@ -25,17 +25,18 @@
 			<h3 class="panel-title">Completed Invoices</h3>
 		  </div>
 		  <div class="panel-body">
-			
-			<ul class="nav nav-tabs">
+		  	<?php include("billing_nav.php"); ?>
+			<!-- <ul class="nav nav-tabs">
 			   <li role="presentation"><a href="billing.php">Billing</a></li>
 			   <li role="presentation"><a href="invoices.php">All Transactions</a></li>
 			  <li role="presentation"><a href="bills.php">Bills</a></li>
 			  <li role="presentation" class="active"><a href="purchases.php">Purchases</a></li>
+			  <li role="presentation"><a href="returns.php">Returns</a></li>
 			  <li role="presentation"><a href="credits.php">Pending Credits</a></li>
 			  <li role="presentation"><a href="completedCredits.php">Completed Credits</a></li>
 			  <li role="presentation"><a href="pending_invoices.php">Pending</a></li>
 			  <li role="presentation"><a href="failed_invoices.php">Failed</a></li>
-			</ul>
+			</ul> -->
 			
 			
 			<div class='well'>
@@ -73,12 +74,12 @@
 								$date2 = mysqli_real_escape_string($db, $_GET['date2']);
 								if( !empty($date1) && !empty($date2) ){
 									
-									$qry = "WHERE (`date` BETWEEN '$date1' AND '$date2') AND status='1' AND transaction='Out'";
+									$qry = "WHERE (`date` BETWEEN '$date1' AND '$date2') AND status='1' AND transaction='Out' AND returnStatus='0'";
 								}else{
-									$qry = "WHERE status='1' AND transaction='Out'";
+									$qry = "WHERE status='1' AND transaction='Out' AND returnStatus='0'";
 								}
 							}else{
-								$qry = "WHERE date='".date('Y-m-d')."' AND status='1' AND transaction='Out'";
+								$qry = "WHERE date='".date('Y-m-d')."' AND status='1' AND transaction='Out' AND returnStatus='0'";
 							}	
 							$sql = "SELECT * FROM invoices $qry ORDER BY id DESC";
 							$get = mysqli_query($db, $sql);

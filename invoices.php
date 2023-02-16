@@ -25,8 +25,8 @@
 			<h3 class="panel-title">Completed Invoices</h3>
 		  </div>
 		  <div class="panel-body">
-			
-			<ul class="nav nav-tabs">
+		  <?php include("billing_nav.php"); ?>
+			<!-- <ul class="nav nav-tabs">
 			   <li role="presentation"><a href="billing.php">Billing</a></li>
 			   <li role="presentation" class="active"><a href="invoices.php">All Transactions</a></li>
 			  <li role="presentation"><a href="bills.php">Bills</a></li>
@@ -35,7 +35,7 @@
 			  <li role="presentation"><a href="completedCredits.php">Completed Credits</a></li>
 			  <li role="presentation"><a href="pending_invoices.php">Pending</a></li>
 			  <li role="presentation"><a href="failed_invoices.php">Failed</a></li>
-			</ul>
+			</ul> -->
 			
 			
 			<div class='well'>
