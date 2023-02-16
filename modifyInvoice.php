@@ -161,7 +161,9 @@
 				
 				<?php
 					// print_r($array);
+					$finalActualPrice = 0;
 					for($i=1; $i<count($array); $i++){
+						
 						if( $array[$i] ){
 							// print_r($array[$i]);
 							$category = $array[$i][0];
@@ -172,7 +174,8 @@
 							$total = $array[$i][5];						
 							$price = $array[$i][8];						
 							$totalprice = $array[$i][7];						
-							$aprice = $array[$i][9];						
+							$aprice = $array[$i][9];
+							$finalActualPrice = $finalActualPrice+$aprice;						
 							$disc = $array[$i][10];						
 							$qtyType = $array[$i][11];						
 							$existedqty = productExistedQty($productid, $db);						
@@ -216,7 +219,7 @@
 							
 			</div>	
 
-			<div class='well'>Total - <b id='finalBillAmount'></b></div>
+			<div class='well'>Total - <b id='finalBillAmount'><?php echo $finalActualPrice; ?></b></div>
 			<!-- <a class='btn btn-xs btn-danger removebillingrow pull-right' ><span class='glyphicon glyphicon-remove'></span> Remove Item</a> -->
 			<button id='updateBill' data-id='<?php echo $invoiceId; ?>' class='btn btn-md btn-info' >Proceed</button>
 			<button id='cancelBill' data-id='<?php echo $invoiceId; ?>' class='btn btn-md btn-warning' >Cancel Invoice</button>

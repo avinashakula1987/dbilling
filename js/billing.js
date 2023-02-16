@@ -33,7 +33,7 @@ $(document).ready(function(){
 	}
 	function remNewBillRow(itemIdinBill){
 		newBillRows = parseInt(itemIdinBill) - 1;
-		alert(itemIdinBill);
+		// alert(itemIdinBill);
 		if( itemIdinBill>1 ){
 			$('.billrow_'+itemIdinBill).hide();
 			$('.addbillingrow').attr('data-id', newBillRows);
@@ -212,7 +212,7 @@ $(document).ready(function(){
 				billTotal = parseFloat(billTotal) + parseFloat($('#billingprice_'+i).val());
 				billFinalTotal = parseFloat(billFinalTotal) + parseFloat($('#billingwithgstprice_'+i).val());
 				billTotalQty = parseInt(billTotalQty) + parseInt($('#billingqty_'+i).val());
-				alert(billFinalTotal);
+				// alert(billFinalTotal);
 			}
 		}
 		
