@@ -186,7 +186,7 @@
 									<input type='text' id='billingproduct_$i' data-id='$i' class='form-control stock_dropdown_billing' hiddenid='$productid' value='$product' placeholder='Product' />
 								</div>						
 								<div class='form-group col-md-1 col-sm-1 col-xs-1 row'>
-									<input type='text' id='billingchoosenqty_$i' data-id='$i' value='$qtyType' readonly disabled class='form-control qtyinputfield$i' placeholder='Measure' />
+									<input type='text' id='billingchoosenqty_$i' data-id='$i' value='$qtyType' class='form-control qtyinputfield$i' placeholder='Measure' />
 								</div>	
 								<div class='form-group col-md-1 col-sm-1 col-xs-1 row'>
 									<input type='text' id='billingqty_$i' data-id='$i' value='$qty' class='form-control billingqty qtyinputfield' placeholder='Qty' />

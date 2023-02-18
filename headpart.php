@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Billing Software</title>	
+	<title>JVK Enterprises Billing Software</title>	
 	<script type='text/javascript' src='js/jquery-3.2.1.min.js'></script>
 	
 	<link rel='stylesheet' href='css/jquery-ui.min.css'></link>
@@ -106,8 +106,7 @@
 	
 	<script>
 		$(function() {   
-			var activecategories2 = <?php include("onlystock.php"); ?>;
-			
+			var activecategories2 = <?php include("onlystock.php"); ?>;			
 			var selector = 'input.stock_dropdown_billing';
 			$(document).on('keydown.autocomplete', selector, function() {
 				$( this).autocomplete({
@@ -133,6 +132,22 @@
 						//$('.addbillingrow').trigger('click');
 						thisRow = $(this).attr('data-id');
 						$('#billingqty_'+thisRow).focus().select();
+					},
+					minLength:1
+				});	
+			});	
+
+
+			var measuresList = <?php include("dynamic_measures.php"); ?>;			
+			var selector_billingchoosenqty = 'input.billingchoosenqty';
+			$(document).on('keydown.autocomplete', selector_billingchoosenqty, function() {
+				$( this).autocomplete({
+				    source: measuresList,
+				    mustMatch: false,
+					select: function( event, ui ) {
+						workingRow = $(this).attr('data-id');						
+						$( this ).val( ui.item.label );
+						$( this ).attr( 'hiddenid',ui.item.id );						
 					},
 					minLength:1
 				});	
@@ -185,7 +200,7 @@
 <body>
 	<div class='container-fluid'>
 		<div class='col-md-2 logo'>
-			<img src='images/logo.png' width=''>
+		JVK Enterprises
 		</div>
 		<div class='clearfix'></div>
 		

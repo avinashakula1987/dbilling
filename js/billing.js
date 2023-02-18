@@ -8,7 +8,7 @@ $(document).ready(function(){
 					<input type='text' id='${`billingproduct_`+itemIdinBill}' data-id='${itemIdinBill}' class='form-control stock_dropdown_billing' placeholder='Product' />
 				</div>				
 				<div class='form-group col-md-1 col-sm-1 col-xs-1 row'>										
-					<input type='text' id='${`billingchoosenqty_`+itemIdinBill}' data-id='${itemIdinBill}' readonly class='form-control billingchoosenqty qtyinputfield' placeholder='Measure' />
+					<input type='text' id='${`billingchoosenqty_`+itemIdinBill}' data-id='${itemIdinBill}' class='form-control billingchoosenqty qtyinputfield' placeholder='Measure' />
 				</div>
 				<div class='form-group col-md-1 col-sm-1 col-xs-1 row'>
 					<input type='text' id='${`billingqty_`+itemIdinBill}' data-id='${itemIdinBill}' class='form-control billingqty qtyinputfield' placeholder='Qty' />

@@ -44,17 +44,17 @@
 	<link rel='stylesheet' href='css/desireit.css'></link>
 	
 </head>
-<body style='background:url(images/bg.jpg)'>
+<body style='background:url(images/bg.jpg);background-size: cover;background-repeat: no-repeat'>
 
-	<div class='container-fluid'>
+	<div class='container-fluid mt-1'>
+		<div class='col-md-12 logo text-center'>
+			<h1 id='business-title'>JVK Enterprises</h2>				
+		</div>
 		<div class='row'>
-			<div class='col-md-12 logo text-center'>
-				<h1 id='business-title'>DBilling Dealer & Retail Software</h2>				
-			</div>
-			<div class='clearfix'></div>
+			
 
-			<div class='col-md-3'></div>
-			<div class='col-md-6'>
+			<div class='col-md-4 col-md-offset-4'>
+				
 				<div class='jumbotron login' >
 					<form action='index.php' method='post'>
 						<label>Username</label><br>
@@ -68,9 +68,8 @@
 				</div>	
 				<?php echo $msg; ?>
 				<div class='clearfix'></div>
-				<div class='text-center text-primary'>Mail us for login credentials: desireitindia@gmail.com<br><img src='images/logo.png' width='50'></div>
+				<div class='text-center text-primary'>For any issues contact at<br><b>6300034252</b></div>
 			</div>
-			<div class='col-md-3'></div>
 
 
 <?php include("footer.php"); ?>

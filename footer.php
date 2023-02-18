@@ -26,7 +26,7 @@
 				<div class='clearfix'></div>
 			</footer>
 		</div>
-	</div>
+</div>
 	
 	
 	

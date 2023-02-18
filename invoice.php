@@ -164,12 +164,8 @@
 			<table align="left" cellpadding="5" cellspacing="1" style="text-align:left; width:100%">
 				<tbody>
 					<tr>
-						<td style="vertical-align:top; padding:5px"><strong>SAI RAM ENTERPRISES</strong><br />
-						S.No: 495/4A &amp; 495/5A<br />
-						PLOT NO 1B, GOLLAPUDI<br />
-						VIJAYAWADA-AP<br />
-						GSTIN/UIN: 37ACIFS6230L1ZQ<br />
-						State Name: Andhra Pradesh, Code: <strong>37</strong></td>
+						<td style="vertical-align:top; padding:5px"><strong>JVK Entraprises</strong><br />						
+							RS NO : 310,<br>D-No : 14-302/5,<br>SVG MARKET,<br>RAJAMAHENDRAVARAM,<br>E.G.D.T (A.P)</td>
 						<td colspan="1" rowspan="3" style="vertical-align:top">
 						<table cellpadding="5" cellspacing="0" style="width:100%; border-left:0; border-top:none; border-right:none">
 							<tr>
@@ -470,7 +466,7 @@
 									<table border="0" style="border:none; margin:10px; vertical-align:top" valign="top">
 										<tr>
 											<td colspan="2" style="border:none">
-												<p>Company's PAN : ACIFS6230L</p>
+												<p>Company's PAN : </p>
 											</td>
 										</tr>
 										<tr>
@@ -482,10 +478,10 @@
 											<td style="border:none; vertical-align:top">
 												Company's Bank Details
 												<p>
-													A/C Holder's Name : SAI RAM ENTERPRISES<br>
-													Bank Name : TAMILNAD MERCANTILE BANK LTD<br>
-													A/C No. : 266700050900044<br>
-													Branch & IFS Code : GOLLAPUDI & TMBL0000266
+													A/C Holder's Name : JVK Entraprises<br>
+													Bank Name : <br>
+													A/C No. : <br>
+													Branch & IFS Code : 
 												</p>
 											</td>
 										</tr>
@@ -502,7 +498,7 @@
 			</table>
 
 			<div align="center">
-				SUBJECT TO VIJAYAWADA JURISDICTION<br>
+				SUBJECT TO xxxxxxxx JURISDICTION<br>
 				This is a Computer Generated Invoice
 			</div>
 		</div>
