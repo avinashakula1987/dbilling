@@ -29,7 +29,7 @@
 		  <li class='<?php echo activemenu("stock.php"); ?> <?php echo activemenu("unavailable_stock.php"); ?> <?php echo activemenu("inactive_stock.php"); ?>'><a href="stock.php"><span class='glyphicon glyphicon-play-circle'></span> Stock</a></li>
 		  <li class='<?php echo activemenu("reports.php"); ?>'><a href="reports.php"><span class='glyphicon glyphicon-play-circle'></span> Reports</a></li>
 		  <li class='<?php echo activemenu("balancesheet.php"); ?>'><a href="balancesheet.php"><span class='glyphicon glyphicon-play-circle'></span> Balancesheet</a></li>
-		  <!-- <li class='<?php echo activemenu("customers.php"); ?>'><a href="customers.php"><span class='glyphicon glyphicon-play-circle'></span> Customers</a></li> -->
+		  <li class='<?php echo activemenu("customers.php"); ?>'><a href="customers.php"><span class='glyphicon glyphicon-play-circle'></span> Customers</a></li>
 		  <!-- <li class='<?php echo activemenu("vehicles.php"); ?>'><a href="vehicles.php"><span class='glyphicon glyphicon-play-circle'></span> Vehicles</a></li> -->
 		  <!-- <li class='<?php echo activemenu("drivers.php"); ?>'><a href="drivers.php"><span class='glyphicon glyphicon-play-circle'></span> Drivers</a></li> -->
 		  <li class='<?php echo activemenu("moderators.php"); ?>'><a href="moderators.php"><span class='glyphicon glyphicon-play-circle'></span> Moderators</a></li>

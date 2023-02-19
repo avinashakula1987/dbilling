@@ -175,7 +175,7 @@
 							$price = $array[$i][8];						
 							$totalprice = $array[$i][7];						
 							$aprice = $array[$i][9];
-							$finalActualPrice = $finalActualPrice+$aprice;						
+							$finalActualPrice = $finalActualPrice+$price;						
 							$disc = $array[$i][10];						
 							$qtyType = $array[$i][11];						
 							$existedqty = productExistedQty($productid, $db);						

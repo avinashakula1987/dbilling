@@ -156,7 +156,7 @@
 								
 								$login = $_SESSION['login'];
 								
-								$sql = "SELECT finaltotal AS totalpurchases, customer, city, state, date, transaction, openingBalance, id, returnStatus FROM invoices WHERE login='$login' AND date BETWEEN '$date1' AND '$date2'";
+								$sql = "SELECT finaltotal AS totalpurchases, customer, city, state, date, transaction, openingBalance, id, returnStatus FROM invoices WHERE login='$login' AND date BETWEEN '$date1' AND '$date2' AND status='1'";
 								$sno = 0;
 								$get = mysqli_query($db, $sql);
 								$openBalance = true;
@@ -190,11 +190,13 @@
 										$transaction2 = $totalpurchases;
 										$saletype = "Receipt<br>Sales";
 									}
-									if( $returnStatus==1 ){
-										$tot = $tot - $totalpurchases;
-									}else{
+									
+									// Check if transaction is `In` or `Out`, If `Out` we should remove from total open balance
+									if( $transaction == "In" ){
 										$tot = $tot + $totalpurchases;
-									}
+									}else{
+										$tot = $tot - $totalpurchases;
+									}	
 									
 
 									

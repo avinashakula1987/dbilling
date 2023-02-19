@@ -65,82 +65,81 @@
 			<h3 class="panel-title">Customers</h3>
 		  </div>
 		  <div class="panel-body">
-			
-			
-				<div>				
-					
-					<div class='col-md-10'>
-						<div class='col-md-2 text-right'>
-							<input type='text' id='mobile' class='form-control' autocomplete='off' autofocus placeholder='Mobile' />
-						</div>
-						<div class='col-md-2 text-right'>
-							<input type='text' id='name' class='form-control' autocomplete='off' placeholder='Name' />
-						</div>
-						<div class='col-md-2 text-right'>
-							<input type='text' id='address' class='form-control' autocomplete='off' placeholder='Address' />
-						</div>	
-						<div class='col-md-2 text-right'>
-							<input type='text' id='gstin' class='form-control' autocomplete='off' placeholder='GSTIN' />
-						</div>		
-						<div class='col-md-2 text-left'>
-							<button id='createcustomer' class='btn btn-md btn-warning' >Create Customer</button>
-						</div>
+				<div class='col-md-12'>
+					<div class='col-md-2 text-right form-group'>
+						<input type='text' id='mobile' class='form-control' autocomplete='off' autofocus placeholder='Mobile' />
+					</div>
+					<div class='col-md-2 text-right form-group'>
+						<input type='text' id='name' class='form-control' autocomplete='off' placeholder='Name' />
+					</div>
+					<div class='col-md-2 text-right form-group'>
+						<input type='text' id='address' class='form-control' autocomplete='off' placeholder='Address' />
 					</div>	
-					
-				</div>
-							
-			
+					<div class='col-md-2 text-right form-group'>
+						<input type='text' id='gstin' class='form-control' autocomplete='off' placeholder='GSTIN' />
+					</div>		
+					<div class='col-md-2 text-right form-group'>
+						<input type='text' id='state' class='form-control' autocomplete='off' placeholder='State' />
+					</div>								
+					<div class='col-md-2 text-right form-group'>
+						<input type='text' id='city' class='form-control' autocomplete='off' placeholder='City' />
+					</div>	
+					<div class='col-md-2 text-right form-group'>
+						<input type='text' id='pincode' class='form-control' autocomplete='off' placeholder='PIN Code' />
+					</div>
+					<div class='col-md-2 text-left form-group'>
+						<button id='createcustomer' class='btn btn-md btn-warning' >Create Customer</button>
+					</div>
+				</div>			
 			<hr>
 			<div class='clearfix'></div>
 			<div class='well'>
-			<div class='table-responsive'>
-			<table class='display nowrap table table-condensed table-striped' id='datatables'>
-				<thead>
-					<th>S No.</th>
-					<th>Name</th>
-					<th>Mobile</th>
-					<th>Address</th>
-					<th>Pending</th>
-					<th>Actions</th>
-				</thead>
-				<tbody>
-					<?php 
-						$sql = "SELECT * FROM customers";
-						$get = mysqli_query($db, $sql);
-						
-						
-							$sno = 1;
-							while( $res = mysqli_fetch_array($get) ){
-								$id = $res['id'];
-								$name = $res['name'];
-								$mobile = $res['mobile'];
-								$address = $res['address'];
-								$pending = pendingCredit($mobile, $db);
-								echo "<tr id='row_$id'>";
-								echo "<td>$sno</td>";
-								echo "<td id='name_$id'>$name</td>";
-								echo "<td id='mobile_$id'>$mobile</td>";
-								echo "<td id='address_$id'>$address</td>";
-								echo "<td id='pending_$id'>
-										<form class='form-inline' role='form'>
-											<div class='input-group'>
-												<input type='text' value='$pending' class='form-control' id='record_$mobile' />
-												 <div class='input-group-btn'>
-													<button actual-pending='$pending' data-mobile='$mobile' class='changecredit btn btn-default' >Update</button>
-												</div>
-											</div>
-										</form>	
-									</td>";
-								echo "<td>
-										<a href='$id' class='btn btn-xs btn-danger del_customer' onclick='return false;'><span class='glyphicon glyphicon-remove'></span> Delete</a></td>";
-								echo "</tr>";
-								$sno++;
-							}
-						
-					?>					
-				</tbody>
-			</table>
-		    </div>
+				<div class='table-responsive'>
+					<table class='display nowrap table table-condensed table-striped' id='datatables'>
+						<thead>
+							<th>S No.</th>
+							<th>Name</th>
+							<th>Mobile</th>
+							<th>Address</th>
+							<th>GST</th>
+							<th>State</th>
+							<th>Pincode</th>
+							<th>City</th>
+							<th>Actions</th>
+						</thead>
+						<tbody>
+							<?php 
+								$sql = "SELECT * FROM customers";
+								$get = mysqli_query($db, $sql);						
+								$sno = 1;
+								while( $res = mysqli_fetch_array($get) ){
+									$id = $res['id'];
+									$name = $res['name'];
+									$mobile = $res['mobile'];
+									$address = $res['address'];
+									$gst = $res['gst'];
+									$state = $res['state'];
+									$pincode = $res['pincode'];
+									$city = $res['city'];
+									echo "<tr id='row_$id'>";
+									echo "<td>$sno</td>";
+									echo "<td id='name_$id'>$name</td>";
+									echo "<td id='mobile_$id'>$mobile</td>";
+									echo "<td id='address_$id'>$address</td>";
+									echo "<td id='gst_$id'>$gst</td>";
+									echo "<td id='state_$id'>$state</td>";
+									echo "<td id='pincode_$id'>$pincode</td>";
+									echo "<td id='city_$id'>$city</td>";								
+									echo "<td>
+											<a href='$id' class='btn btn-xs btn-danger del_customer' onclick='return false;'><span class='glyphicon glyphicon-remove'></span> Delete</a></td>";
+									echo "</tr>";
+									$sno++;
+								}
+								
+							?>					
+						</tbody>
+					</table>
+				</div>
 			</div>
 		  </div>
 		</div>

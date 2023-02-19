@@ -119,13 +119,16 @@
 		$customer_name = $_POST['customer_name'];
 		$customer_address = $_POST['customer_address'];
 		$customer_gstin = $_POST['customer_gstin'];
+		$customer_state = $_POST['customer_state'];
+		$customer_pincode = $_POST['customer_pincode'];
+		$customer_city = $_POST['customer_city'];
 		
 		$sql = "SELECT COUNT(*) AS count FROM customers WHERE mobile='$customer_mobile'";
 		$existance_check = mysqli_query($db, $sql);
 		$r = mysqli_fetch_array($existance_check);
 		$count = $r['count'];
 		if( $count == 0 ){
-			$sql2 = "INSERT INTO customers (name, mobile, address, gst) VALUES('$customer_name', '$customer_mobile', '$customer_address', '$customer_gstin')";
+			$sql2 = "INSERT INTO customers (name, mobile, address, gst, state, pincode, city) VALUES('$customer_name', '$customer_mobile', '$customer_address', '$customer_gstin', '$customer_state', '$customer_pincode', '$customer_city')";
 			$insert = mysqli_query($db, $sql2);
 			if( $insert ){
 				echo true;

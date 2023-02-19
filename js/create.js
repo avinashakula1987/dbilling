@@ -46,20 +46,18 @@ $(document).ready(function(){
 		customer_name = $('#name').val();
 		customer_address = $('#address').val();
 		customer_gstin = $('#gstin').val();
-		// alert(customer_mobile);
-		// alert(customer_name);
-		// alert(customer_address);
-		// alert(customer_gstin);
-		$.post("processing.php", {customer_gstin:customer_gstin, customer_mobile:customer_mobile, customer_name:customer_name, customer_address:customer_address}, function(res){
-			alert(res);
-			// if( res == true ){
-			// 	$('#mobile').val('');	
-			// 	$('#name').val('');	
-			// 	$('#address').val('');	
-			// 	alert("Successfully created");
-			// }else{
-			// 	alert(res);				
-			// }	
+		customer_state = $('#state').val();
+		customer_pincode = $('#pincode').val();
+		customer_city = $('#city').val();		
+		$.post("processing.php", {customer_gstin:customer_gstin, customer_mobile:customer_mobile, customer_name:customer_name, customer_address:customer_address, customer_state:customer_state, customer_pincode:customer_pincode, customer_city:customer_city}, function(res){
+			if( res == true ){
+				$('#mobile').val('');	
+				$('#name').val('');	
+				$('#address').val('');	
+				alert("Successfully created");
+			}else{
+				alert(res);				
+			}	
 		});
 	});
 	

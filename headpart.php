@@ -91,6 +91,12 @@
 			   source: customersinformation,
 				select: function( event, ui ) {
 					$( '#mobile' ).val( ui.item.mobile );
+					$( '#state' ).val( ui.item.state );
+					$( '#city' ).val( ui.item.city );
+					$( '#gstno' ).val( ui.item.gst );
+					$( '#pincode' ).val( ui.item.pincode );
+					$( '#state' ).val( ui.item.state );
+					$( '#address' ).val( ui.item.address );
 					$( this ).val( ui.item.label );
 					$( this ).attr( 'hiddenid',ui.item.id );
 					$('#vehicle').focus();
@@ -152,6 +158,7 @@
 					minLength:1
 				});	
 			});	
+			
 			
 			$(document).keyup(function(e) {
 				if (e.keyCode == 27) {
