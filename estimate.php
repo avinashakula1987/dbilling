@@ -150,8 +150,10 @@
 		<div class='text-center '>  
 			<?php //$dd = invoiceHeader($db); echo $dd[0]; ?>
 <br>
+<h3 align='center'>JVK ENTERPRISES</h3>
 <table align="left" border="0" cellpadding="1" cellspacing="1" style="width:100%; border:none">
 	<tbody>
+		
 		<tr>
 			<td style="width:33%; border:none; font-size:2em">ESTIMATE</td>
 			<td style="text-align:center; width:33%; border:none"><strong><span style="font-size:20px">Slip No.: <?= $estimateId; ?></span></strong></td>

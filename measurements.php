@@ -9,7 +9,7 @@
 	<div class='row'>
 		<div class="panel panel-primary mainbody">
 		  <div class="panel-heading">
-			<h3 class="panel-title">Measurements</h3>
+			<h3 class="panel-title">Measure</h3>
 		  </div>
 		  <div class="panel-body">
 		  <?php include("stock_nav.php"); ?>
@@ -28,12 +28,12 @@
 				
 				<div class='row'>					
 					<div class='form-group   col-md-3 text-left'>
-						<label>Measurement</label><br>
-						<input type='text' id='quantity' class='form-control dontstay' placeholder='Measurement' />					
+						<label>Measure</label><br>
+						<input type='text' id='quantity' class='form-control dontstay' placeholder='Measure' />					
 					</div>
 				</div>	
 				
-				<button id='createQuantity' class='btn btn-md btn-info' >Create Measurement</button>			
+				<button id='createQuantity' class='btn btn-md btn-info' >Create Measure</button>			
 			</div>	
 
 			<div class='well'>
@@ -41,7 +41,7 @@
 				<table class='table table-condensed' id='datatables'>
 					<thead>
 						<th>S No.</th>
-						<th>Measurement</th>
+						<th>Measure</th>
 						<th>Actions</th>
 					</thead>
 					<tbody>

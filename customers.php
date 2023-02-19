@@ -74,10 +74,7 @@
 					</div>
 					<div class='col-md-2 text-right form-group'>
 						<input type='text' id='address' class='form-control' autocomplete='off' placeholder='Address' />
-					</div>	
-					<div class='col-md-2 text-right form-group'>
-						<input type='text' id='gstin' class='form-control' autocomplete='off' placeholder='GSTIN' />
-					</div>		
+					</div>							
 					<div class='col-md-2 text-right form-group'>
 						<input type='text' id='state' class='form-control' autocomplete='off' placeholder='State' />
 					</div>								
@@ -87,6 +84,10 @@
 					<div class='col-md-2 text-right form-group'>
 						<input type='text' id='pincode' class='form-control' autocomplete='off' placeholder='PIN Code' />
 					</div>
+					<div class='col-md-2 text-right form-group'>
+						<input type='text' id='gstin' class='form-control' autocomplete='off' placeholder='GSTIN' />
+						<a onclick="verifyGST()" class='btn btn-link'>Verify</a>
+					</div>	
 					<div class='col-md-2 text-left form-group'>
 						<button id='createcustomer' class='btn btn-md btn-warning' >Create Customer</button>
 					</div>
@@ -161,6 +162,17 @@
 			});			
 		});
 	});
+
+	function verifyGST(){
+            let gst = document.getElementById('gstin').value;
+            if( gst!='' && gst.length ==15){
+                let gstLink = `https://cleartax.in/gst-number-search/${gst}/`
+                window.open(gstLink, '_blank');
+            }else{
+                alert("GST you entered are not valid! try again");
+            }
+            
+        }
 </script>
 
 

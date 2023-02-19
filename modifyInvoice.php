@@ -121,9 +121,9 @@
 					</div>
 					<div class='form-group col-md-3 col-sm-6 col-xs-12'>
 						<select id='fullPayment' class='form-control'>
-							<option value='<?php echo $fullPayment; ?>'><?php echo $fullPayment; ?></option>
-							<option value='Full'>Full</option>
-							<option value='Partial'>Partial</option>
+							<option value='<?php echo $fullPayment; ?>'><?php echo $fullPayment=="Full" ? "Cash & Carry" : "Credit"; ?></option>
+							<option value='Full'>Cash & Carry</option>
+							<option value='Partial'>Credit</option>
 						</select>
 					</div>
 					<div class='form-group col-md-3 col-sm-6 col-xs-12'>
@@ -222,7 +222,7 @@
 			<div class='well'>Total - <b id='finalBillAmount'><?php echo $finalActualPrice; ?></b></div>
 			<!-- <a class='btn btn-xs btn-danger removebillingrow pull-right' ><span class='glyphicon glyphicon-remove'></span> Remove Item</a> -->
 			<button id='updateBill' data-id='<?php echo $invoiceId; ?>' class='btn btn-md btn-info' >Proceed</button>
-			<button id='cancelBill' data-id='<?php echo $invoiceId; ?>' class='btn btn-md btn-warning' >Cancel Invoice</button>
+			<button id='cancelBill' data-id='<?php echo $invoiceId; ?>' class='btn btn-md btn-warning' >Delete Invoice</button>
 			
 			
 			

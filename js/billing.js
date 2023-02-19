@@ -218,7 +218,7 @@ $(document).ready(function(){
 		
 		billingInfos = JSON.stringify(billingInfo);		
 
-		if( confirm("Are you sure?") ){
+		if( confirm("Are you sure to submit ?") ){
 			$.post('processing.php', {returnStatus:returnStatus, customername:customername, mobile:mobile, state:state, city:city, address:address, pincode:pincode, gst:gst, dispatchThrough:dispatchThrough, vehicle:vehicle, transaction:transaction, billingInfos:billingInfos, billTotal:billTotal, billTotalQty:billTotalQty, billFinalTotal:billFinalTotal, openingBalance:openingBalance, fullPayment:fullPayment, partialPayment:partialPayment}, function(res){			
 				if( res == true ){
 					location.href='modifyInvoice.php';

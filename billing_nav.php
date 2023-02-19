@@ -9,6 +9,6 @@
 	<?php echo $current_page == "returns.php" ? "<li role='presentation' class='active'>" : "<li role='presentation'>" ?><a href="returns.php">Returns</a></li>
 	<?php echo $current_page == "credits.php" ? "<li role='presentation' class='active'>" : "<li role='presentation'>" ?><a href="credits.php">Pending Credits</a></li>
 	<?php echo $current_page == "completedCredits.php" ? "<li role='presentation' class='active'>" : "<li role='presentation'>" ?><a href="completedCredits.php">Completed Credits</a></li>
-	<?php echo $current_page == "pending_invoices.php" ? "<li role='presentation' class='active'>" : "<li role='presentation'>" ?><a href="pending_invoices.php">Pending</a></li>
-	<?php echo $current_page == "failed_invoices.php" ? "<li role='presentation' class='active'>" : "<li role='presentation'>" ?><a href="failed_invoices.php">Failed</a></li>
+	<?php echo $current_page == "pending_invoices.php" ? "<li role='presentation' class='active'>" : "<li role='presentation'>" ?><a href="pending_invoices.php">Pending Invoices</a></li>
+	<!-- <?php echo $current_page == "failed_invoices.php" ? "<li role='presentation' class='active'>" : "<li role='presentation'>" ?><a href="failed_invoices.php">Failed Invoices</a></li> -->
 </ul>

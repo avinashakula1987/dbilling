@@ -34,7 +34,7 @@
 				<div class='clearfix'></div><br>
 				<div class='row'>
 					<div class='form-group col-md-3 col-sm-6 col-xs-12'>
-						<input type='text' id='customername' class='form-control customers_dropdown' autofocus placeholder='Customer' />
+						<input type='text' id='customername' class='form-control customers_dropdown' autofocus placeholder='Customer'/>
 					</div>
 					<div class='form-group col-md-3 col-sm-6 col-xs-12'>
 						<input type='text' id='mobile' class='form-control' placeholder='Mobile' />
@@ -47,21 +47,7 @@
 					<div class='form-group col-md-3 col-sm-6 col-xs-12'>
 						<input type='text' id='vehicle' class='form-control' placeholder='Vehicle No' />
 					</div>
-					<div class='form-group col-md-3 col-sm-6 col-xs-12'>
-						<input type='text' id='state' class='form-control' placeholder='State' />
-					</div>
-					<div class='form-group col-md-3 col-sm-6 col-xs-12'>
-						<input type='text' id='pincode' class='form-control' placeholder='Pin Code' />
-					</div>
-					<div class='form-group col-md-3 col-sm-6 col-xs-12'>
-						<input type='text' id='gstno' class='form-control' placeholder='GST' />
-					</div>
-					<div class='form-group col-md-3 col-sm-6 col-xs-12'>
-						<input type='text' id='city' class='form-control' placeholder='City' />
-					</div>
-					<div class='form-group col-md-3 col-sm-6 col-xs-12'>
-						<textarea id='address' rows="2" class='form-control' placeholder='Address' contenteditable ></textarea>
-					</div>
+								
 					<div class='form-group col-md-3 col-sm-6 col-xs-12'>
 						<select id='transaction' class='form-control'>
 							<option value='In'>In</option>
@@ -73,8 +59,8 @@
 					</div>
 					<div class='form-group col-md-3 col-sm-6 col-xs-12'>
 						<select id='fullPayment' class='form-control'>
-							<option value='Full'>Full</option>
-							<option value='Partial'>Partial</option>
+							<option value='Full'>Cash & Carry</option>
+							<option value='Partial'>Credit</option>
 						</select>
 					</div>
 					<div class='form-group col-md-3 col-sm-6 col-xs-12'>
@@ -82,6 +68,23 @@
 					</div>
 					<div class='form-group col-md-3 col-sm-6 col-xs-12'>
 						<input type='text' id='openingBalance' readonly disabled class='form-control' placeholder='Opening Balance' />
+					</div>
+					<div class='form-group col-md-3 col-sm-6 col-xs-12'>
+						<input type='text' id='state' class='form-control' placeholder='State' />
+					</div>
+					<div class='form-group col-md-3 col-sm-6 col-xs-12'>
+						<input type='text' id='pincode' class='form-control' placeholder='Pin Code' />
+					</div>
+					
+					<div class='form-group col-md-3 col-sm-6 col-xs-12'>
+						<input type='text' id='city' class='form-control' placeholder='City' />
+					</div>		
+					<div class='form-group col-md-3 col-sm-6 col-xs-12'>
+						<input type='text' id='gstno' class='form-control' placeholder='GST' />
+						<a onclick="verifyGST()" class='btn btn-link'>Verify</a>
+					</div>
+					<div class='form-group col-md-3 col-sm-6 col-xs-12'>
+						<textarea id='address' rows="2" class='form-control' placeholder='Address' contenteditable ></textarea>
 					</div>
 					
 				</div>
@@ -152,7 +155,7 @@
 
 
 			<div class='clearfix'></div>
-			<div class='text-center closebuttonblock'><button class='btn btn-danger btn-sm' onclick='windowclose();'>Close</button></div>
+			<!-- <div class='text-center closebuttonblock'><button class='btn btn-danger btn-sm' onclick='windowclose();'>Close</button></div> -->
 			
 		</div>
 	</div>
@@ -200,7 +203,23 @@
 		}
 		openingBalance();
 
+
+		
+
+
 	});
+
+
+	function verifyGST(){
+            let gst = document.getElementById('gstno').value;
+            if( gst!='' && gst.length ==15){
+                let gstLink = `https://cleartax.in/gst-number-search/${gst}/`
+                window.open(gstLink, '_blank');
+            }else{
+                alert("GST you entered are not valid! try again");
+            }
+            
+        }
 		
 			
 </script>
