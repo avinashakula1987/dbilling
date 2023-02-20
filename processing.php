@@ -366,6 +366,8 @@
 		$openingBalance = $_POST['openingBalance'];
 		$returnStatus = $_POST['returnStatus'];
 		$transaction = $_POST['transaction'];
+		$fullPayment = $_POST['fullPayment'];
+		$partialPayment = $_POST['partialPayment'];
 		// $openBal = $billFinalTotal + $openingBalance;
 		// Check if qty existed
 		//$qtyvalidation = qtyUpdation($billingInfos);
@@ -375,8 +377,14 @@
 		// reduceQuantity
 		if( $transaction == "Out" ){
 			echo decreaseOpenBalance($billFinalTotal, $db);		
-		}else{			
-			echo increaseOpenBalance($billFinalTotal, $db);	
+		}else{		
+			if($transaction == "In"){	
+				if( $fullPayment == "Partial" ){
+					echo increaseOpenBalance($partialPayment, $db);						
+				}else{
+					echo increaseOpenBalance($billFinalTotal, $db);
+				}
+			}
 		}
 		
 			
