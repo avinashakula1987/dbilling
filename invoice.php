@@ -111,6 +111,7 @@
 		$pin = $res["pin"];
 		$dat = $res["date"];
 		$dispatchThrough = $res["dispatchThrough"];
+		$partialPayment = $res["partialPayment"];
 		$consigneeVehicle = $res["vehicle"];		
 		$transaction = $res["transaction"];		
 		$date = date("d-M-y", strtotime($dat));		
@@ -434,6 +435,12 @@
 												$tally1 = $tally1 + $actual_individual_price_total;
 												$tally2 = $tally2 + $gst_tot;
 												$grandtotal = $tally1 + $gsttotal;
+												if( $partialPayment ){
+													$pendingBalance = $grandtotal - $partialPaymen;
+
+												}else{
+													$pendingBalance = 0;	
+												}
 												echo "
 													<tr>
 														<td>$sno</td>
@@ -459,6 +466,14 @@
 								<td class='text-center'></td>
 								<td class='text-center'></td>
 								<td class='text-center finalpayabl'><?php echo $grandtotal; ?> /-</td>
+							</tr>
+							<tr>
+								<td class='text-center'></td>
+								<td class='text-right'>Pending</td>					
+								<td class='text-center'><?php echo $pendingBalance; ?></td>
+								<td class='text-center'></td>
+								<td class='text-center'>Paid</td>
+								<td class='text-center'><?php echo $partialPayment ? $partialPayment : $grandtotal; ?> /-</td>
 							</tr>
 							</tbody>
 						</table>
