@@ -419,6 +419,7 @@
 		$insert = mysqli_query($db, $sql);	
 		if( $clearance_pendingStatus == 1 ){
 			mysqli_query($db, "UPDATE invoices SET clearanceStatus='1' WHERE id='$clearance_refId'");
+			increaseOpenBalance($clearance_payingAmount, $db);	
 		}	
 		echo true;							
 		exit();

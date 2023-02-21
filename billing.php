@@ -63,9 +63,7 @@
 							<option value='Partial'>Credit</option>
 						</select>
 					</div>
-					<div class='form-group col-md-3 col-sm-6 col-xs-12'>
-						<input type='text' id='partialPayment' class='form-control' disabled placeholder='Payment' />
-					</div>
+					
 					<div class='form-group col-md-3 col-sm-6 col-xs-12'>
 						<input type='text' id='openingBalance' readonly disabled class='form-control' placeholder='Opening Balance' />
 					</div>
@@ -142,7 +140,19 @@
 					</div>	
 				</div>							
 			</div>	
-			<div class='well'>Total - <b id='finalBillAmount'></b></div>
+			<div class='well'>
+				<div class='row'>
+					<div class='form-group col-md-2 col-sm-2 col-xs-3'>
+						<input type='text' id='partialPayment' class='form-control' disabled placeholder='Paying' />
+					</div>
+					<div class='form-group col-md-3 col-sm-3 col-xs-3'>
+						Total - <b id='finalBillAmount'></b>
+					</div>
+					<div class='form-group col-md-3 col-sm-3 col-xs-3'>
+						Pending - <b id='finalPendingBillAmount'></b>
+					</div>
+				</div>
+			</div>	
 			<!-- <a class='btn btn-xs btn-warning removebillingrow pull-right' ><span class='glyphicon glyphicon-remove'></span> Remove Item</a> -->
 			<button id='createBill' class='btn btn-md btn-danger' >Submit</button>
 			

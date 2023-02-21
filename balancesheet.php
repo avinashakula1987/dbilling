@@ -156,7 +156,7 @@
 								
 								$login = $_SESSION['login'];
 								
-								$sql = "SELECT finaltotal AS totalpurchases, customer, city, state, date, transaction, openingBalance, id, returnStatus, fullPayment, partialPayment FROM invoices WHERE login='$login' AND date BETWEEN '$date1' AND '$date2' AND status='1'";
+								$sql = "SELECT finaltotal AS totalpurchases, customer, city, state, date, transaction, openingBalance, id, returnStatus, refId, fullPayment, partialPayment FROM invoices WHERE login='$login' AND date BETWEEN '$date1' AND '$date2' AND status='1'";
 								$sno = 0;
 								$get = mysqli_query($db, $sql);
 								$openBalance = true;
@@ -170,11 +170,12 @@
 									$partialPayment = $res['partialPayment'];
 									$totalpurchases = $fullPayment == "Full" ? $res['totalpurchases'] : $partialPayment;
 									$city = $res['city'];
-									$state = $res['state'];
-									$customer = $res['customer'];
+									$state = $res['state'] ? ", ".$res['state'] : "N/A";
+									$customer = $res['customer'] ? $res['customer'] : "N/A";
 									$dat = $res['date'];
 									$transaction = $res['transaction'];
 									$returnStatus = $res['returnStatus'];
+									$refId = $res['refId'] ? "<i><b style='color:red'> (Ref #".$res['refId'].")</b></i>" : "";
 									
 									
 									
@@ -217,9 +218,9 @@
 									echo "
 									<tr>
 										<td>$date</td>
-										<td>$customer<br>$city, $state</td>									
+										<td>$customer<br>$city $state</td>									
 										<td>$saletype</td>
-										<td>$id</td>
+										<td>$id$refId</td>
 										<td>$totalpurchases</td>
 										<td>$transaction1</td>
 										<td>$transaction2</td>

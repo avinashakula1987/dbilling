@@ -166,8 +166,19 @@ $(document).ready(function(){
 				billFinalTotal = parseFloat(billFinalTotal) + parseFloat($('#billingwithgstprice_'+i).val());				
 			}
 		}
+		
+		let partialPayment = $('#partialPayment').val();
 		$('#finalBillAmount').html(billFinalTotal);
+
+		partialPayment && $('#finalPendingBillAmount').html(billFinalTotal - partialPayment);
 	}
+
+	$(document).on("keyup", "#partialPayment", function(){
+		updateTotalBillAmount();;
+		
+	});
+
+
 
 	
 	$('#fullPayment').change(function(){
